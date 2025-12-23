@@ -3,7 +3,7 @@ import { cn } from '../../lib/utils';
 import { Sparkles, User } from 'lucide-react';
 import ProductCard from '../product/ProductCard';
 
-const MessageBubble = ({ message }) => {
+const MessageBubble = ({ message, onProductClick }) => {
     const isUser = message.role === 'user';
 
     return (
@@ -48,7 +48,10 @@ const MessageBubble = ({ message }) => {
                         <div className="grid gap-4 grid-cols-2 lg:grid-cols-3 max-w-2xl">
                             {message.products.map(product => (
                                 <div key={product.id} className="h-[380px]">
-                                    <ProductCard product={product} />
+                                    <ProductCard
+                                        product={product}
+                                        onCardClick={onProductClick}
+                                    />
                                 </div>
                             ))}
                         </div>

@@ -4,6 +4,7 @@ import { cn } from '../../lib/utils';
 import MessageBubble from './MessageBubble';
 import { useChat } from '../../hooks/useChat';
 import { useAuth } from '../../context/AuthContext';
+import ProductDetailPanel from '../product/ProductDetailPanel';
 
 const ChatLayout = () => {
     const { messages, isLoading, sendMessage, sendImageMessage, chatHistory, startNewChat, loadChat, deleteChat, currentChatId, chatMode, setChatMode, scanBarcode } = useChat();
@@ -16,6 +17,8 @@ const ChatLayout = () => {
     const [isRecording, setIsRecording] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
     const [showScanner, setShowScanner] = useState(false);
+    const [activeProduct, setActiveProduct] = useState(null);
+    const [isPanelOpen, setIsPanelOpen] = useState(false);
 
     // Scroll to bottom when messages change
     useEffect(() => {
@@ -181,7 +184,14 @@ const ChatLayout = () => {
                         ) : (
                             <div className="space-y-6">
                                 {messages.map((msg) => (
-                                    <MessageBubble key={msg.id} message={msg} />
+                                    <MessageBubble
+                                        key={msg.id}
+                                        message={msg}
+                                        onProductClick={(product) => {
+                                            setActiveProduct(product);
+                                            setIsPanelOpen(true);
+                                        }}
+                                    />
                                 ))}
                                 {isLoading && (
                                     <div className="flex items-start gap-3 animate-pulse">
@@ -249,6 +259,13 @@ const ChatLayout = () => {
                     </div>
                 )}
             </div>
+
+            {/* Product Detail Panel (Slide-over) */}
+            <ProductDetailPanel
+                product={activeProduct}
+                isOpen={isPanelOpen}
+                onClose={() => setIsPanelOpen(false)}
+            />
         </div>
     );
 };

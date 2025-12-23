@@ -2,10 +2,14 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Tag, Clock, ExternalLink, Sparkles, TrendingUp, Zap, Heart, Filter, ArrowRight, ShoppingBag } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useAuth } from '../context/AuthContext';
+import ProductDetailPanel from '../components/product/ProductDetailPanel';
 
 const SalesTracker = () => {
     const { user } = useAuth();
     const [selectedBrand, setSelectedBrand] = useState('All');
+    const [activeProduct, setActiveProduct] = useState(null);
+    const [isPanelOpen, setIsPanelOpen] = useState(false);
+
 
     // Powerful Mock Data - Articles with Style "Vibes"
     const articles = [
@@ -148,8 +152,13 @@ const SalesTracker = () => {
                     {filteredArticles.map((article) => (
                         <div
                             key={article.id}
-                            className="group bg-white rounded-[2rem] overflow-hidden border border-grey-100 shadow-sm hover:shadow-2xl hover:shadow-navy-100/50 transition-all duration-500 flex flex-col"
+                            onClick={() => {
+                                setActiveProduct(article);
+                                setIsPanelOpen(true);
+                            }}
+                            className="group bg-white rounded-[2rem] overflow-hidden border border-grey-100 shadow-sm hover:shadow-2xl hover:shadow-navy-100/50 transition-all duration-500 flex flex-col cursor-pointer"
                         >
+
                             {/* Visual Image Section */}
                             <div className="relative aspect-[3/4] overflow-hidden">
                                 <img
@@ -247,7 +256,15 @@ const SalesTracker = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Product Detail Panel (Slide-over) */}
+            <ProductDetailPanel
+                product={activeProduct}
+                isOpen={isPanelOpen}
+                onClose={() => setIsPanelOpen(false)}
+            />
         </div>
+
     );
 };
 
