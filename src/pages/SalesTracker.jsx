@@ -221,10 +221,6 @@ const SalesTracker = () => {
                                         </a>
                                     </div>
 
-                                    <button className="w-full py-4 bg-white border-2 border-grey-100 rounded-2xl font-black text-navy-900 text-sm flex items-center justify-center gap-2 hover:bg-navy-900 hover:text-white hover:border-navy-900 transition-all">
-                                        Ask AI for Styling
-                                        <ArrowRight className="w-4 h-4" />
-                                    </button>
                                 </div>
                             </div>
                         </div>
