@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, User, Heart, MessageCircle, MapPin, Sparkles } from 'lucide-react';
+import { ShoppingBag, User, Heart, MessageCircle, MapPin, Tag } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -41,12 +41,12 @@ const Navbar = () => {
                             <MessageCircle className="w-6 h-6" />
                         </Link>
 
-                        {/* Shop The Look */}
+                        {/* Hafta Bazaar (Sales) */}
                         <Link
-                            to="/trending"
-                            className={`p-2 rounded-lg transition-colors ${location.pathname === '/trending' ? 'bg-navy-100 text-navy-800' : 'text-grey-600 hover:text-navy-800 hover:bg-grey-100'}`}
+                            to="/sales"
+                            className={`p-2 rounded-lg transition-colors ${location.pathname === '/sales' ? 'bg-red-50 text-red-600' : 'text-grey-600 hover:text-red-600 hover:bg-red-50'}`}
                         >
-                            <Sparkles className="w-6 h-6" />
+                            <Tag className="w-6 h-6" />
                         </Link>
 
                         {/* Find a Store */}

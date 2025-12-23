@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { MapPin, Star, Heart, MessageCircle } from 'lucide-react';
+import { MapPin, Star, Heart, MessageCircle, Sparkles, ShoppingBag, ExternalLink } from 'lucide-react';
+
+// ... (imports remain same)
+
 import { useWishlistStore } from '../../store/useWishlistStore';
 import { cn } from '../../lib/utils';
 import FitAnalysisModal from './FitAnalysisModal';
+import VirtualTryOnModal from './VirtualTryOnModal';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
@@ -13,8 +17,11 @@ const ProductCard = ({ product }) => {
 
     const { toggleWishlist, isInWishlist } = useWishlistStore();
     const [showFitModal, setShowFitModal] = useState(false);
+    const [showTryOnModal, setShowTryOnModal] = useState(false);
 
     const isLiked = isInWishlist(id);
+    const brandLink = `https://www.${brand?.toLowerCase().replace(/\s+/g, '')}.com/search?q=${encodeURIComponent(name || '')}`;
+
 
     const handleToggleWishlist = (e) => {
         e.stopPropagation();
@@ -40,15 +47,23 @@ const ProductCard = ({ product }) => {
                 </button>
 
                 {/* Image */}
-                <div className="relative aspect-[3/4] overflow-hidden bg-grey-100 rounded-t-xl">
-                    <img
-                        src={imageUrl || 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=400'}
-                        alt={name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                <div className="relative aspect-[3/4] overflow-hidden rounded-t-xl group">
+                    <a
+                        href={brandLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full h-full bg-grey-100"
+                        onClick={(e) => e.stopPropagation()} // Prevent card click from triggering link
+                    >
+                        <img
+                            src={imageUrl || 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=400'}
+                            alt={name}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                    </a>
 
                     {/* Quick Actions overlay - Find Store & WhatsApp */}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 px-4">
+                    <div className="absolute inset-0 bg-navy-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4 gap-2">
                         <Link
                             to="/stores"
                             className="w-full py-2 rounded-lg font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-all flex items-center justify-center gap-2 bg-white text-navy-900 hover:bg-navy-50"
@@ -57,6 +72,16 @@ const ProductCard = ({ product }) => {
                             <MapPin className="w-4 h-4" />
                             Find in Store
                         </Link>
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowTryOnModal(true);
+                            }}
+                            className="w-full py-2 rounded-lg font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-all flex items-center justify-center gap-2 bg-navy-800 text-white hover:bg-navy-900"
+                        >
+                            <Sparkles className="w-4 h-4" />
+                            Virtual Try-On
+                        </button>
                         <button
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -81,7 +106,16 @@ const ProductCard = ({ product }) => {
                         </div>
                     </div>
 
-                    <h3 className="text-sm font-medium text-navy-900 mb-1 line-clamp-2 min-h-[2.5em]">{name}</h3>
+                    <a
+                        href={brandLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-navy-600 transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <h3 className="text-sm font-medium text-navy-900 mb-1 line-clamp-2 min-h-[2.5em]">{name}</h3>
+                    </a>
+
 
                     <div className="mt-auto flex items-end justify-between">
                         <div className="flex items-baseline gap-2">
@@ -106,6 +140,11 @@ const ProductCard = ({ product }) => {
             <FitAnalysisModal
                 isOpen={showFitModal}
                 onClose={() => setShowFitModal(false)}
+                product={product}
+            />
+            <VirtualTryOnModal
+                isOpen={showTryOnModal}
+                onClose={() => setShowTryOnModal(false)}
                 product={product}
             />
         </>

@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles, Send, Mic, Camera, ShoppingBag, Zap, TrendingUp, Palette, Plus, MessageSquare, PanelLeftClose, PanelLeft, X, Image as ImageIcon, Scan, Briefcase, Moon, Heart } from 'lucide-react';
+import { Sparkles, Send, Mic, Camera, ShoppingBag, Zap, TrendingUp, Palette, Plus, MessageSquare, PanelLeftClose, PanelLeft, X, Image as ImageIcon, Scan, Briefcase, Moon, Heart, Trash2 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import MessageBubble from './MessageBubble';
 import { useChat } from '../../hooks/useChat';
 import { useAuth } from '../../context/AuthContext';
 
 const ChatLayout = () => {
-    const { messages, isLoading, sendMessage, sendImageMessage, chatHistory, startNewChat, loadChat, currentChatId, chatMode, setChatMode, scanBarcode } = useChat();
+    const { messages, isLoading, sendMessage, sendImageMessage, chatHistory, startNewChat, loadChat, deleteChat, currentChatId, chatMode, setChatMode, scanBarcode } = useChat();
     const { user } = useAuth();
+
     const messagesEndRef = useRef(null);
     const fileInputRef = useRef(null);
     const [input, setInput] = useState('');
@@ -106,13 +107,30 @@ const ChatLayout = () => {
                 <div className="flex-1 overflow-y-auto p-3 space-y-1">
                     <p className="px-3 py-2 text-xs font-bold text-grey-400 uppercase tracking-wider">Recent Chats</p>
                     {chatHistory.map((chat) => (
-                        <button key={chat.id} onClick={() => loadChat(chat.id)} className={cn("w-full text-left px-3 py-3 rounded-xl text-sm group flex items-start gap-3 transition-all", currentChatId === chat.id ? "bg-navy-50 border border-navy-200" : "hover:bg-grey-100")}>
-                            <MessageSquare className={cn("w-4 h-4 mt-0.5 flex-shrink-0", currentChatId === chat.id ? "text-navy-600" : "text-grey-400")} />
-                            <div className="min-w-0">
-                                <div className={cn("font-medium truncate", currentChatId === chat.id ? "text-navy-800" : "text-grey-700")}>{chat.title}</div>
-                                <div className="text-xs text-grey-400">{chat.date}</div>
-                            </div>
-                        </button>
+                        <div key={chat.id} className="group relative">
+                            <button
+                                onClick={() => loadChat(chat.id)}
+                                className={cn(
+                                    "w-full text-left px-3 py-3 rounded-xl text-sm flex items-start gap-3 transition-all pr-12",
+                                    currentChatId === chat.id ? "bg-navy-50 border border-navy-200" : "hover:bg-grey-100"
+                                )}
+                            >
+                                <MessageSquare className={cn("w-4 h-4 mt-0.5 flex-shrink-0", currentChatId === chat.id ? "text-navy-600" : "text-grey-400")} />
+                                <div className="min-w-0">
+                                    <div className={cn("font-medium truncate", currentChatId === chat.id ? "text-navy-800" : "text-grey-700")}>{chat.title}</div>
+                                    <div className="text-xs text-grey-400">{chat.date}</div>
+                                </div>
+                            </button>
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    deleteChat(chat.id);
+                                }}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-grey-400 hover:text-red-500 hover:bg-red-50 rounded-lg opacity-0 group-hover:opacity-100 transition-all"
+                            >
+                                <Trash2 className="w-4 h-4" />
+                            </button>
+                        </div>
                     ))}
                 </div>
             </aside>

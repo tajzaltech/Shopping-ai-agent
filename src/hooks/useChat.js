@@ -72,6 +72,20 @@ export const useChat = () => {
         }
     }, [chatHistory]);
 
+    const deleteChat = useCallback((chatId) => {
+        setChatHistory(prev => {
+            const updated = prev.filter(c => c.id !== chatId);
+            saveToLocalStorage(updated);
+            return updated;
+        });
+
+        if (currentChatId === chatId) {
+            setMessages([]);
+            setCurrentChatId(null);
+        }
+    }, [currentChatId]);
+
+
     // Pakistani products mock data with PKR prices
     const mockProducts = [
         {
@@ -217,6 +231,7 @@ export const useChat = () => {
         chatHistory,
         startNewChat,
         loadChat,
+        deleteChat,
         currentChatId,
         chatMode,
         setChatMode,

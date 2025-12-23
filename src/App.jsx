@@ -9,7 +9,7 @@ import Chat from './pages/Chat';
 import StoreLocator from './pages/StoreLocator';
 import Wishlist from './pages/Wishlist';
 import Profile from './pages/Profile';
-import ShopTheLook from './pages/ShopTheLook';
+import SalesTracker from './pages/SalesTracker';
 import { useAuth } from './context/AuthContext';
 
 // Protected Route Component
@@ -49,9 +49,10 @@ function App() {
             <Chat />
           </ProtectedRoute>
         } />
-        <Route path="/trending" element={
+
+        <Route path="/sales" element={
           <ProtectedRoute>
-            <ShopTheLook />
+            <SalesTracker />
           </ProtectedRoute>
         } />
         <Route path="/stores" element={
