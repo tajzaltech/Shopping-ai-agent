@@ -1,178 +1,181 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { User, Settings, Package, LogOut, Wallet, Sparkles } from 'lucide-react';
-import { cn } from '../lib/utils';
+import { Settings, LogOut, ShieldCheck, UserCircle, ChevronRight } from 'lucide-react';
 
 const Profile = () => {
-    const { user, logout } = useAuth();
+    const { user, logout, updateProfile } = useAuth();
+    const [name, setName] = React.useState(user?.name || '');
+    const [email, setEmail] = React.useState(user?.email || '');
+    const [password, setPassword] = React.useState('');
+    const [confirmPassword, setConfirmPassword] = React.useState('');
+    const [feedback, setFeedback] = React.useState({ message: '', type: '' });
 
-    // Mock onboarding data if not present on user object
-    const profileData = user?.profileData || {
-        gender: 'Female',
-        ageRange: '25-34',
-        styles: ['Minimalist', 'Chic'],
-        colors: ['Black', 'Navy', 'White'],
-        fit: 'Regular'
+    const handleUpdateProfile = (e) => {
+        e.preventDefault();
+        try {
+            updateProfile({ name, email });
+            setFeedback({ message: 'Identity updated successfully', type: 'success' });
+            setTimeout(() => setFeedback({ message: '', type: '' }), 3000);
+        } catch (err) {
+            setFeedback({ message: 'Failed to update identity', type: 'error' });
+        }
+    };
+
+    const handleChangePassword = (e) => {
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            setFeedback({ message: 'Passwords do not match', type: 'error' });
+            return;
+        }
+        // Mock password change
+        setFeedback({ message: 'Security vault secured', type: 'success' });
+        setPassword('');
+        setConfirmPassword('');
+        setTimeout(() => setFeedback({ message: '', type: '' }), 3000);
     };
 
     return (
-        <div className="min-h-screen bg-grey-50 pt-20 pb-10 px-4">
-            <div className="max-w-4xl mx-auto">
-                <div className="bg-white rounded-2xl shadow-sm border border-grey-100 overflow-hidden">
-                    {/* Style Khata (Budget Tracker) */}
-                    <div className="bg-white rounded-3xl shadow-xl border border-grey-200 p-8 mb-8 overflow-hidden relative">
-                        <div className="absolute top-0 right-0 p-6 opacity-10">
-                            <Wallet className="w-32 h-32 text-navy-900" />
+        <div className="min-h-screen bg-[#FDFDFF] relative overflow-hidden font-sans selection:bg-navy-900/10">
+            {/* Animated Mesh Gradient Background */}
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-navy-50/40 blur-[120px] rounded-full animate-pulse" />
+                <div className="absolute bottom-[-5%] right-[-5%] w-[70%] h-[70%] bg-blue-50/20 blur-[100px] rounded-full" />
+                <div className="absolute top-[20%] right-[10%] w-[40%] h-[40%] bg-indigo-50/20 blur-[80px] rounded-full animate-bounce [animation-duration:15s]" />
+            </div>
+
+            <div className="relative z-10 max-w-3xl mx-auto pt-32 pb-24 px-6">
+                <div className="space-y-16">
+
+                    {/* Simplified Cinematic Header */}
+                    <div className="text-center space-y-8 animate-fade-in">
+                        <div className="relative inline-block">
+                            <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center text-5xl font-extralight text-navy-900 border border-grey-100 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] mx-auto relative overflow-hidden group">
+                                <div className="absolute inset-0 bg-gradient-to-tr from-navy-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                {user?.name?.charAt(0) || 'S'}
+                            </div>
+                            {user?.isVerified && (
+                                <div className="absolute bottom-1 right-1 bg-white rounded-full p-2 shadow-sm border border-grey-100">
+                                    <ShieldCheck className="w-5 h-5 text-navy-600 fill-navy-50" />
+                                </div>
+                            )}
                         </div>
 
-                        <div className="relative z-10">
-                            <div className="flex items-center justify-between mb-8">
-                                <div>
-                                    <h2 className="text-2xl font-bold text-navy-900">Expense Ledger 💰</h2>
-                                    <p className="text-grey-600">Monthly fashion budget tracker</p>
-                                </div>
-                                <div className="text-right">
-                                    <span className="text-xs font-bold text-grey-400 uppercase tracking-widest">Spent this month</span>
-                                    <div className="text-2xl font-black text-navy-900">Rs. 18,500</div>
-                                </div>
-                            </div>
-
-                            {/* Budget Progress */}
-                            <div className="mb-10">
-                                <div className="flex justify-between text-sm font-bold mb-2">
-                                    <span className="text-grey-700">Budget Limit: Rs. 30,000</span>
-                                    <span className="text-navy-600">62% Used</span>
-                                </div>
-                                <div className="h-4 bg-grey-100 rounded-full overflow-hidden border border-grey-200">
-                                    <div
-                                        className="h-full bg-navy-800 transition-all duration-1000 ease-out flex items-center justify-end px-2"
-                                        style={{ width: '62%' }}
-                                    >
-                                        <div className="w-1 h-2 bg-white/30 rounded-full"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Brand Breakdown */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <h3 className="text-sm font-bold text-grey-400 uppercase tracking-widest mb-4">Top Brands</h3>
-                                    <div className="space-y-4">
-                                        {[
-                                            { name: 'Khaadi', amount: 8500, color: 'bg-navy-800' },
-                                            { name: 'Sapphire', amount: 6000, color: 'bg-navy-600' },
-                                            { name: 'Outfitters', amount: 4000, color: 'bg-navy-400' }
-                                        ].map((item) => (
-                                            <div key={item.name} className="flex items-center gap-4">
-                                                <div className="w-24 text-sm font-bold text-grey-700">{item.name}</div>
-                                                <div className="flex-1 h-2 bg-grey-100 rounded-full overflow-hidden">
-                                                    <div
-                                                        className={cn("h-full rounded-full", item.color)}
-                                                        style={{ width: `${(item.amount / 18500) * 100}%` }}
-                                                    />
-                                                </div>
-                                                <div className="w-20 text-right text-sm font-bold text-navy-900">Rs. {item.amount.toLocaleString()}</div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <div className="bg-navy-50 rounded-2xl p-6 border border-navy-100 flex flex-col justify-center">
-                                    <div className="flex items-center gap-3 text-navy-800 font-bold mb-2">
-                                        <Sparkles className="w-5 h-5" />
-                                        AI Savings Tip
-                                    </div>
-                                    <p className="text-navy-700/80 text-sm leading-relaxed">
-                                        You've spent most of your budget on lawn. **Gul Ahmed** just started a 30% flat sale at Lucky One Mall. You could save approx **Rs. 2,500** on your next purchase!
-                                    </p>
-                                </div>
-                            </div>
+                        <div className="space-y-2">
+                            <h1 className="text-3xl font-light tracking-tight text-navy-900 uppercase">
+                                {user?.name || 'Stylist'}
+                            </h1>
+                            <p className="text-grey-400 font-medium text-xs tracking-[0.3em] uppercase">
+                                Account Identity
+                            </p>
                         </div>
                     </div>
 
-                    {/* Header */}
-                    <div className="bg-navy-900 px-8 py-10 text-white flex items-center gap-6">
-                        <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center text-3xl font-bold border-2 border-white/20">
-                            {user?.name?.charAt(0) || 'U'}
-                        </div>
-                        <div>
-                            <h1 className="text-white/60 text-2xl font-bold">{user?.name || 'User Name'}</h1>
-                            <p className="text-white/60">{user?.email || 'user@example.com'}</p>
-                        </div>
-                    </div>
+                    {/* Simplified Settings Forms */}
+                    <div className="space-y-12 animate-slide-up [animation-delay:0.1s]">
 
-                    <div className="p-8">
-                        {/* Style Profile Section */}
-                        <div className="mb-10">
-                            <h2 className="text-xl font-bold text-navy-900 mb-4 flex items-center gap-2">
-                                <User className="w-5 h-5 text-navy-600" />
-                                Your Style Profile
-                            </h2>
-                            <div className="grid md:grid-cols-2 gap-4">
-                                <div className="p-4 bg-grey-50 rounded-xl border border-grey-100">
-                                    <span className="text-xs font-bold text-grey-500 uppercase">Fit Preference</span>
-                                    <p className="font-semibold text-navy-900 mt-1">{profileData.fit}</p>
+                        {/* Status/Feedback Header */}
+                        <div className="flex items-center justify-between px-2">
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-2xl bg-white border border-grey-100 flex items-center justify-center shadow-sm">
+                                    <Settings className="w-6 h-6 text-navy-900" />
                                 </div>
-                                <div className="p-4 bg-grey-50 rounded-xl border border-grey-100">
-                                    <span className="text-xs font-bold text-grey-500 uppercase">Age Range</span>
-                                    <p className="font-semibold text-navy-900 mt-1">{profileData.ageRange}</p>
-                                </div>
-                                <div className="p-4 bg-grey-50 rounded-xl border border-grey-100">
-                                    <span className="text-xs font-bold text-grey-500 uppercase">Favorite Styles</span>
-                                    <div className="flex flex-wrap gap-2 mt-2">
-                                        {profileData.styles?.map(s => (
-                                            <span key={s} className="px-2 py-1 bg-white rounded-md text-xs font-medium border border-grey-200">
-                                                {s}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div className="p-4 bg-grey-50 rounded-xl border border-grey-100">
-                                    <span className="text-xs font-bold text-grey-500 uppercase">Preferred Colors</span>
-                                    <div className="flex flex-wrap gap-2 mt-2">
-                                        {profileData.colors?.map(c => (
-                                            <span key={c} className="px-2 py-1 bg-white rounded-md text-xs font-medium border border-grey-200">
-                                                {c}
-                                            </span>
-                                        ))}
-                                    </div>
+                                <div>
+                                    <h2 className="text-sm font-black text-navy-900 uppercase tracking-[0.25em]">Credentials</h2>
+                                    <p className="text-[9px] font-bold text-navy-400 uppercase tracking-widest mt-0.5 opacity-60 text-left">Manage your identity</p>
                                 </div>
                             </div>
+
+                            {feedback.message && (
+                                <div className={`px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-[0.15em] animate-scale-in border shadow-lg backdrop-blur-md ${feedback.type === 'success' ? "bg-emerald-50/80 text-emerald-600 border-emerald-100 shadow-emerald-500/10" : "bg-red-50/80 text-red-600 border-red-100 shadow-red-500/10"
+                                    }`}>
+                                    {feedback.message}
+                                </div>
+                            )}
                         </div>
 
-                        {/* Account Actions */}
-                        <div className="grid md:grid-cols-2 gap-4">
-                            <button className="p-4 flex items-center gap-4 bg-white border border-grey-200 rounded-xl hover:border-navy-300 hover:shadow-md transition-all text-left">
-                                <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center">
-                                    <Package className="w-5 h-5" />
+                        {/* Identity Section */}
+                        <div className="bg-white/80 backdrop-blur-3xl border border-white rounded-[3rem] p-12 shadow-[0_32px_64px_-24px_rgba(0,0,0,0.04)]">
+                            <form onSubmit={handleUpdateProfile} className="space-y-12">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                    <div className="space-y-3 px-2">
+                                        <label className="text-[10px] font-black text-navy-900/40 uppercase tracking-[0.25em] ml-1">Name</label>
+                                        <input
+                                            type="text"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            className="w-full px-7 py-5 bg-grey-50/50 border border-navy-900/5 rounded-2xl text-[13px] font-semibold text-navy-900 placeholder:text-grey-300 focus:bg-white focus:border-navy-900/10 focus:ring-8 focus:ring-navy-900/[0.02] transition-all duration-500 outline-none shadow-[inset_0_2px_4px_rgba(0,0,0,0.01)]"
+                                            placeholder="Your Name"
+                                        />
+                                    </div>
+                                    <div className="space-y-3 px-2">
+                                        <label className="text-[10px] font-black text-navy-900/40 uppercase tracking-[0.25em] ml-1">Email</label>
+                                        <input
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            className="w-full px-7 py-5 bg-grey-50/50 border border-navy-900/5 rounded-2xl text-[13px] font-semibold text-navy-900 placeholder:text-grey-300 focus:bg-white focus:border-navy-900/10 focus:ring-8 focus:ring-navy-900/[0.02] transition-all duration-500 outline-none shadow-[inset_0_2px_4px_rgba(0,0,0,0.01)]"
+                                            placeholder="Email Address"
+                                        />
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 className="font-bold text-navy-900">Order History</h3>
-                                    <p className="text-xs text-grey-500">Track returns and past orders</p>
-                                </div>
-                            </button>
-                            <button className="p-4 flex items-center gap-4 bg-white border border-grey-200 rounded-xl hover:border-navy-300 hover:shadow-md transition-all text-left">
-                                <div className="w-10 h-10 bg-grey-100 text-grey-600 rounded-full flex items-center justify-center">
-                                    <Settings className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-navy-900">Settings</h3>
-                                    <p className="text-xs text-grey-500">Notifications, password, etc</p>
-                                </div>
-                            </button>
+
+                                <button className="w-full py-6 bg-navy-900 text-white rounded-[1.5rem] text-[11px] font-black uppercase tracking-[0.3em] hover:bg-black transition-all duration-500 active:scale-[0.99] relative overflow-hidden group/btn">
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
+                                    Update Identity
+                                </button>
+                            </form>
                         </div>
 
-                        {/* Logout */}
-                        <div className="mt-10 pt-6 border-t border-grey-100">
+                        {/* Security Section */}
+                        <div className="bg-white/80 backdrop-blur-3xl border border-white rounded-[3rem] p-12 shadow-[0_32px_64px_-24px_rgba(0,0,0,0.04)] pb-12">
+                            <form onSubmit={handleChangePassword} className="space-y-12">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                    <div className="space-y-3 px-2">
+                                        <label className="text-[10px] font-black text-navy-900/40 uppercase tracking-[0.25em] ml-1">New Password</label>
+                                        <input
+                                            type="password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            className="w-full px-7 py-5 bg-grey-50/50 border border-navy-900/5 rounded-2xl text-[13px] font-semibold text-navy-900 placeholder:text-grey-300 focus:bg-white focus:border-navy-900/10 focus:ring-8 focus:ring-navy-900/[0.02] transition-all duration-500 outline-none shadow-[inset_0_2px_4px_rgba(0,0,0,0.01)]"
+                                            placeholder="••••••••"
+                                        />
+                                    </div>
+                                    <div className="space-y-3 px-2">
+                                        <label className="text-[10px] font-black text-navy-900/40 uppercase tracking-[0.25em] ml-1">Confirm Identity</label>
+                                        <input
+                                            type="password"
+                                            value={confirmPassword}
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                            className="w-full px-7 py-5 bg-grey-50/50 border border-navy-900/5 rounded-2xl text-[13px] font-semibold text-navy-900 placeholder:text-grey-300 focus:bg-white focus:border-navy-900/10 focus:ring-8 focus:ring-navy-900/[0.02] transition-all duration-500 outline-none shadow-[inset_0_2px_4px_rgba(0,0,0,0.01)]"
+                                            placeholder="••••••••"
+                                        />
+                                    </div>
+                                </div>
+
+                                <button className="w-full py-5 bg-white border-2 border-navy-900 text-navy-900 rounded-[1.5rem] text-[11px] font-black uppercase tracking-[0.3em] hover:bg-navy-900 hover:text-white transition-all duration-500 shadow-sm active:scale-[0.99]">
+                                    Secure Password
+                                </button>
+                            </form>
+                        </div>
+
+                        {/* Logout - Bottom Center */}
+                        <div className="pt-6">
                             <button
                                 onClick={logout}
-                                className="flex items-center gap-2 text-red-500 font-semibold hover:text-red-600 transition-colors"
+                                className="w-full py-6 bg-white border border-red-50 text-red-500 rounded-[2.5rem] text-[11px] font-black uppercase tracking-[0.2em] hover:bg-red-50/50 transition-all active:scale-[0.99] flex items-center justify-center gap-3 group"
                             >
-                                <LogOut className="w-5 h-5" />
-                                Sign Out
+                                <LogOut className="w-4 h-4 opacity-40 group-hover:opacity-100 transition-opacity" />
+                                <span>Logout</span>
                             </button>
                         </div>
                     </div>
+                </div>
+
+                {/* Footer Signature */}
+                <div className="mt-28 text-center animate-fade-in [animation-delay:0.5s]">
+                    <p className="text-[10px] font-black text-navy-900/10 uppercase tracking-[0.5em]">
+                        Privacy Systems — StylistAI
+                    </p>
                 </div>
             </div>
         </div>

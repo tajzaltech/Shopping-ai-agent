@@ -21,8 +21,7 @@ const SalesTracker = () => {
             originalPrice: 12980,
             discount: "50% FLAT",
             image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=800",
-            vibe: "Formal / Elegant",
-            vibeMatch: 98,
+            category: "Formal Wear",
             tags: ["Trending", "Desi Wear"]
         },
         {
@@ -33,8 +32,7 @@ const SalesTracker = () => {
             originalPrice: 4990,
             discount: "30% OFF",
             image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=800",
-            vibe: "Minimalist / Airy",
-            vibeMatch: 95,
+            category: "Casual Summer",
             tags: ["New Arrival Sale", "Summer"]
         },
         {
@@ -45,8 +43,7 @@ const SalesTracker = () => {
             originalPrice: 5980,
             discount: "50% OFF",
             image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&q=80&w=800",
-            vibe: "Streetwear / Urban",
-            vibeMatch: 92,
+            category: "Urban / Street",
             tags: ["Flash Sale", "Z-Generation"]
         },
         {
@@ -57,8 +54,7 @@ const SalesTracker = () => {
             originalPrice: 11500,
             discount: "Rs. 3000 OFF",
             image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&q=80&w=800",
-            vibe: "Traditional / Rich",
-            vibeMatch: 96,
+            category: "Traditional",
             tags: ["Shaadi Season", "Limited"]
         },
         {
@@ -69,8 +65,7 @@ const SalesTracker = () => {
             originalPrice: 9000,
             discount: "50% FLAT",
             image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&q=80&w=800",
-            vibe: "Modern / Professional",
-            vibeMatch: 94,
+            category: "Modern Chic",
             tags: ["Editor's Choice"]
         },
         {
@@ -81,8 +76,7 @@ const SalesTracker = () => {
             originalPrice: 5900,
             discount: "50% OFF",
             image: "https://images.unsplash.com/photo-1610030469668-935102a11b65?auto=format&fit=crop&q=80&w=800",
-            vibe: "Artsy / Bold",
-            vibeMatch: 91,
+            category: "Artsy / Bold",
             tags: ["Clearance"]
         }
     ];
@@ -95,43 +89,37 @@ const SalesTracker = () => {
     }, [selectedBrand]);
 
     return (
-        <div className="min-h-screen bg-grey-50 pt-20 pb-12">
-            {/* Professional White Header Section */}
-            <div className="bg-white border-b border-grey-200 py-12 px-6">
+        <div className="min-h-screen bg-white pt-20 pb-12">
+            {/* Elite White Header Section */}
+            <div className="bg-white py-16 px-6">
                 <div className="max-w-7xl mx-auto space-y-6">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <div className="space-y-2">
-                            <div className="flex items-center gap-2 text-red-600 font-black tracking-widest text-xs uppercase">
-                                <Zap className="w-4 h-4 fill-current" />
-                                Live Tracking
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-grey-100 pb-12">
+                        <div className="space-y-4">
+                            <div className="flex items-center gap-3 text-grey-400 font-bold tracking-[0.2em] text-[10px] uppercase">
+                                <Clock className="w-4 h-4" />
+                                Updated 2 minutes ago
                             </div>
-                            <h1 className="text-4xl md:text-5xl font-black text-navy-900 tracking-tight">
-                                Sales Optimized for <span className="text-navy-600 underline decoration-navy-200 underline-offset-8">You</span>
+                            <h1 className="text-5xl md:text-7xl font-light text-navy-900 tracking-tight leading-[1.1]">
+                                The Curated <br /><span className="font-serif italic text-navy-800">Sales Ledger</span>
                             </h1>
-                            <p className="text-grey-500 font-medium text-lg max-w-2xl">
-                                Discover premium articles on sale, analyzed and matched to your style vibe.
+                            <p className="text-grey-500 font-medium text-lg max-w-xl leading-relaxed">
+                                A definitive collection of premium articles currently on sale across major Pakistani brands, curated for the modern identity.
                             </p>
-                        </div>
-
-                        <div className="flex items-center gap-4">
-                            <div className="bg-navy-50 px-6 py-4 rounded-3xl border border-navy-100 flex flex-col">
-                                <span className="text-[10px] font-black text-navy-400 uppercase tracking-widest leading-none mb-2">My Vibe Type</span>
-                                <span className="text-navy-900 font-black text-lg">Minimalist Desi</span>
-                            </div>
                         </div>
                     </div>
 
                     {/* Brand Filter Row */}
-                    <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+                    <div className="flex items-center gap-3 overflow-x-auto py-8 scrollbar-none">
+                        <span className="text-[10px] font-bold text-grey-400 uppercase tracking-widest mr-4">Filter by Brand</span>
                         {brands.map((brand) => (
                             <button
                                 key={brand}
                                 onClick={() => setSelectedBrand(brand)}
                                 className={cn(
-                                    "px-6 py-2.5 rounded-full text-sm font-bold transition-all whitespace-nowrap border-2",
+                                    "px-8 py-3 rounded-full text-xs font-bold transition-all whitespace-nowrap border",
                                     selectedBrand === brand
-                                        ? "bg-navy-800 border-navy-800 text-white shadow-lg shadow-navy-100"
-                                        : "bg-white border-grey-100 text-grey-500 hover:border-navy-200 hover:text-navy-700"
+                                        ? "bg-navy-900 border-navy-900 text-white shadow-xl shadow-navy-900/10"
+                                        : "bg-white border-grey-100 text-grey-500 hover:border-grey-300 hover:text-navy-900"
                                 )}
                             >
                                 {brand}
@@ -142,10 +130,12 @@ const SalesTracker = () => {
             </div>
 
             {/* Main Content Grid */}
-            <div className="max-w-7xl mx-auto px-6 mt-10">
-                <div className="flex items-center gap-3 mb-8">
-                    <Sparkles className="text-navy-400 w-5 h-5" />
-                    <h2 className="text-2xl font-black text-navy-900 tracking-tight uppercase">Article Discovery Feed</h2>
+            <div className="max-w-7xl mx-auto px-6 mt-16">
+                <div className="flex items-center justify-between mb-12">
+                    <div className="space-y-1">
+                        <h2 className="text-2xl font-light text-navy-900 tracking-tight uppercase">Article Discovery</h2>
+                        <div className="h-px w-20 bg-navy-900"></div>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -160,94 +150,74 @@ const SalesTracker = () => {
                         >
 
                             {/* Visual Image Section */}
-                            <div className="relative aspect-[3/4] overflow-hidden">
+                            <div className="relative aspect-[3/4] overflow-hidden bg-grey-50">
                                 <img
                                     src={article.image}
                                     alt={article.name}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                 />
 
-                                <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1.5 rounded-xl text-[10px] font-black tracking-widest shadow-xl">
+                                <div className="absolute top-6 left-6 bg-white border border-grey-100 text-navy-900 px-3 py-1.5 rounded-full text-[9px] font-bold tracking-widest shadow-sm">
                                     {article.discount}
                                 </div>
 
-                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-xl border border-white/20 shadow-lg text-navy-900">
-                                    <Heart className="w-5 h-5 hover:fill-red-500 hover:text-red-500 transition-colors cursor-pointer" />
-                                </div>
-
-                                {/* Vibe Match Overlay - Subtle but powerful */}
-                                <div className="absolute inset-x-4 bottom-4">
-                                    <div className="bg-navy-900/80 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex items-center justify-between">
-                                        <div className="flex flex-col">
-                                            <span className="text-[10px] font-black text-white/50 uppercase tracking-widest">{article.vibe}</span>
-                                            <span className="text-white font-bold text-xs">Vibe Match {article.vibeMatch}%</span>
-                                        </div>
-                                        <div className="w-10 h-10 rounded-full border-2 border-white/20 flex items-center justify-center p-1">
-                                            <div className="w-full h-full rounded-full bg-green-500 flex items-center justify-center">
-                                                <TrendingUp className="w-4 h-4 text-white" />
-                                            </div>
-                                        </div>
+                                <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <div className="bg-white p-2.5 rounded-full shadow-xl border border-grey-100 text-navy-900 hover:text-red-500 transition-colors">
+                                        <Heart className="w-4 h-4" />
                                     </div>
                                 </div>
                             </div>
 
                             {/* Info Section */}
-                            <div className="p-6 flex flex-col flex-1">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <span className="text-xs font-black text-navy-500 uppercase tracking-widest">{article.brand}</span>
-                                    {article.tags.map(tag => (
-                                        <span key={tag} className="text-[10px] font-bold text-grey-400 border border-grey-100 px-2 py-0.5 rounded-full whitespace-nowrap">
-                                            {tag}
-                                        </span>
-                                    ))}
+                            <div className="p-8 flex flex-col flex-1">
+                                <div className="flex items-center justify-between mb-4">
+                                    <span className="text-[10px] font-bold text-navy-400 uppercase tracking-[0.2em]">{article.brand}</span>
+                                    <span className="text-[10px] font-medium text-grey-400 italic">{article.category}</span>
                                 </div>
-                                <h3 className="text-lg font-bold text-navy-900 mb-4 line-clamp-2 leading-tight flex-1">
+
+                                <h3 className="text-lg font-light text-navy-900 mb-6 line-clamp-1 truncate leading-tight flex-1">
                                     {article.name}
                                 </h3>
 
-                                <div className="flex flex-col gap-4">
-                                    <div className="flex items-center justify-between border-t border-grey-50 pt-4">
-                                        <div>
-                                            <div className="text-sm text-grey-400 line-through font-bold">Rs. {article.originalPrice.toLocaleString()}</div>
-                                            <div className="text-2xl font-black text-navy-900">Rs. {article.price.toLocaleString()}</div>
-                                        </div>
-                                        <a
-                                            href={`https://www.${article.brand.toLowerCase().replace(/\s+/g, '')}.com/products/${article.name.toLowerCase().replace(/\s+/g, '-')}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="p-4 bg-navy-50 text-navy-800 rounded-2xl hover:bg-navy-800 hover:text-white transition-all transform active:scale-95 group/btn border border-navy-100"
-                                        >
-                                            <ExternalLink className="w-5 h-5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                                        </a>
+                                <div className="flex items-end justify-between pt-6 border-t border-grey-50">
+                                    <div className="space-y-1">
+                                        <span className="block text-[10px] text-grey-400 line-through font-medium">Rs. {article.originalPrice.toLocaleString()}</span>
+                                        <span className="block text-2xl font-bold text-navy-900">Rs. {article.price.toLocaleString()}</span>
                                     </div>
-
+                                    <div className="w-10 h-10 rounded-full border border-grey-100 flex items-center justify-center text-grey-400 group-hover:bg-navy-900 group-hover:text-white transition-all duration-500">
+                                        <ArrowRight className="w-4 h-4" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Bottom Sales Summary - Interactive */}
+                {/* Bottom Sales Summary - Neat & Clean */}
                 <div className="mt-20 flex flex-col md:flex-row gap-8">
-                    <div className="flex-1 bg-white p-8 rounded-[3rem] border border-grey-100 shadow-sm flex items-center gap-6">
-                        <div className="w-20 h-20 bg-red-50 rounded-3xl flex items-center justify-center">
-                            <Tag className="w-10 h-10 text-red-500" />
+                    <div className="flex-1 bg-white p-10 rounded-[2rem] border border-grey-100 flex items-center gap-8">
+                        <div className="w-16 h-16 bg-navy-50 rounded-full flex items-center justify-center shrink-0">
+                            <Tag className="w-6 h-6 text-navy-900" />
                         </div>
                         <div>
-                            <h4 className="text-xl font-black text-navy-900 mb-1">Upcoming Sales Alert 📢</h4>
-                            <p className="text-grey-500 font-medium">Junaid Jamshed Festive Sale starts in 4 hours. 200+ articles detected.</p>
-                            <button className="text-red-600 font-bold text-sm mt-2 hover:underline">Set Reminder →</button>
+                            <h4 className="text-xs font-bold text-navy-400 uppercase tracking-widest mb-2">Upcoming Alert</h4>
+                            <p className="text-xl font-light text-navy-900 leading-relaxed">
+                                Junaid Jamshed Festive Sale starts in <span className="font-bold">4 hours</span>.
+                            </p>
+                            <button className="text-navy-900 font-bold text-sm mt-4 hover:underline flex items-center gap-2">
+                                Set Reminder <ArrowRight className="w-4 h-4" />
+                            </button>
                         </div>
                     </div>
 
-                    <div className="w-full md:w-80 bg-navy-900 p-8 rounded-[3rem] text-white flex flex-col justify-between">
-                        <div className="flex justify-between items-start">
-                            <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em]">Verified Sales</span>
-                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <div className="w-full md:w-96 bg-white p-10 rounded-[2rem] border border-grey-100 flex flex-col justify-between">
+                        <div className="flex justify-between items-center mb-8">
+                            <span className="text-[10px] font-bold text-grey-400 uppercase tracking-widest">Verified Inventory</span>
+                            <div className="w-2 h-2 rounded-full bg-green-500"></div>
                         </div>
                         <div>
-                            <div className="text-4xl font-black mb-1">1,402</div>
-                            <div className="text-xs font-bold text-white/50 uppercase">Articles in Hafta Bazaar Today</div>
+                            <div className="text-6xl font-light text-navy-900 mb-2">1,402</div>
+                            <div className="text-[10px] font-bold text-navy-400 uppercase tracking-widest leading-none">Articles Tracked Today</div>
                         </div>
                     </div>
                 </div>

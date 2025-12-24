@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }) => {
                     id: 'user_123',
                     name: email.split('@')[0],
                     email: email,
-                    onboardingCompleted: false
                 };
 
                 setUser(mockUser);
@@ -48,17 +47,53 @@ export const AuthProvider = ({ children }) => {
         setLoading(true);
         return new Promise((resolve) => {
             setTimeout(() => {
-                const mockUser = {
+                const newUser = {
                     id: 'user_' + Date.now(),
                     name,
                     email,
-                    onboardingCompleted: false
+                    isVerified: false
                 };
 
-                setUser(mockUser);
-                localStorage.setItem('shopping-agent-user', JSON.stringify(mockUser));
+                setUser(newUser);
+                localStorage.setItem('shopping-agent-user', JSON.stringify(newUser));
                 setLoading(false);
-                resolve(mockUser);
+                resolve(newUser);
+            }, 1000);
+        });
+    };
+
+    const loginWithGoogle = async () => {
+        setLoading(true);
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const googleUser = {
+                    id: 'google_' + Date.now(),
+                    name: 'Google User',
+                    email: 'google@user.com',
+                    isVerified: true
+                };
+                setUser(googleUser);
+                localStorage.setItem('shopping-agent-user', JSON.stringify(googleUser));
+                setLoading(false);
+                resolve(googleUser);
+            }, 1000);
+        });
+    };
+
+    const verifyEmail = async (code) => {
+        setLoading(true);
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (code.length === 6) {
+                    const verifiedUser = { ...user, isVerified: true };
+                    setUser(verifiedUser);
+                    localStorage.setItem('shopping-agent-user', JSON.stringify(verifiedUser));
+                    setLoading(false);
+                    resolve(true);
+                } else {
+                    setLoading(false);
+                    reject(new Error('Invalid code'));
+                }
             }, 1000);
         });
     };
@@ -76,7 +111,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, signup, logout, updateProfile, loading }}>
+        <AuthContext.Provider value={{ user, login, signup, logout, loginWithGoogle, verifyEmail, updateProfile, loading }}>
             {children}
         </AuthContext.Provider>
     );

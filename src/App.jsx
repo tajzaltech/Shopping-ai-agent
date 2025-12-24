@@ -10,6 +10,7 @@ import StoreLocator from './pages/StoreLocator';
 import Wishlist from './pages/Wishlist';
 import Profile from './pages/Profile';
 import SalesTracker from './pages/SalesTracker';
+import VerifyEmail from './pages/VerifyEmail';
 import { useAuth } from './context/AuthContext';
 
 // Protected Route Component
@@ -30,31 +31,17 @@ function App() {
     <Routes>
       <Route element={<Layout />}>
         {/* Default - redirect to chat */}
-        <Route path="/" element={
-          <ProtectedRoute>
-            <Navigate to="/chat" replace />
-          </ProtectedRoute>
-        } />
+        {/* Home Page */}
+        <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
 
         {/* Protected Routes */}
-        <Route path="/onboarding" element={
-          <ProtectedRoute>
-            <Onboarding />
-          </ProtectedRoute>
-        } />
-        <Route path="/chat" element={
-          <ProtectedRoute>
-            <Chat />
-          </ProtectedRoute>
-        } />
 
-        <Route path="/sales" element={
-          <ProtectedRoute>
-            <SalesTracker />
-          </ProtectedRoute>
-        } />
+        <Route path="/chat" element={<Chat />} />
+
+        <Route path="/sales" element={<SalesTracker />} />
         <Route path="/stores" element={
           <ProtectedRoute>
             <StoreLocator />

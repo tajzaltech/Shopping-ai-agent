@@ -48,7 +48,7 @@ const ProductCard = ({ product, onCardClick }) => {
                 </button>
 
                 {/* Image */}
-                <div className="relative aspect-[3/4] overflow-hidden rounded-t-xl group/img">
+                <div className="relative h-48 overflow-hidden rounded-t-xl group/img">
                     <img
                         src={imageUrl || 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=400'}
                         alt={name}
@@ -81,14 +81,14 @@ const ProductCard = ({ product, onCardClick }) => {
                 {/* Content */}
                 <div className="p-3 flex flex-col flex-1">
                     <div className="flex justify-between items-start mb-1">
-                        <span className="text-[10px] font-black text-grey-400 uppercase tracking-[0.2em]">{brand}</span>
+                        <span className="text-[9px] font-black text-grey-400 uppercase tracking-widest">{brand}</span>
                         <div className="flex items-center gap-1 text-xs text-navy-600 font-bold">
                             <Star className="w-3 h-3 fill-current" />
                             4.5
                         </div>
                     </div>
 
-                    <h3 className="text-sm font-bold text-navy-900 mb-1 line-clamp-2 min-h-[2.5em] leading-tight">{name}</h3>
+                    <h3 className="text-[13px] font-bold text-navy-900 mb-1 line-clamp-2 min-h-[2.5em] leading-tight">{name}</h3>
 
                     <div className="mt-auto flex items-end justify-between">
                         <div className="flex flex-col">
@@ -99,15 +99,15 @@ const ProductCard = ({ product, onCardClick }) => {
                         </div>
 
                         {fitConfidence && (
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setShowFitModal(true);
-                                }}
-                                className="text-[10px] font-black text-green-600 bg-green-50 px-2 py-1 rounded-lg hover:bg-green-100 transition-colors uppercase tracking-wider"
-                            >
-                                {fitConfidence}% Fit Risk
-                            </button>
+                            <div className="flex items-center justify-between">
+                                <span className="text-[9px] font-black text-grey-400 uppercase tracking-widest">Fit Confidence</span>
+                                <span className={cn(
+                                    "text-[9px] font-black uppercase px-2 py-0.5 rounded",
+                                    fitConfidence > 10 ? "bg-green-50 text-green-600" : "bg-amber-50 text-amber-600"
+                                )}>
+                                    {fitConfidence > 10 ? 'High' : 'Medium'}
+                                </span>
+                            </div>
                         )}
                     </div>
                 </div>
