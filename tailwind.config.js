@@ -13,6 +13,11 @@ export default {
           700: '#2D4A6E',
           600: '#3E5E87',
           500: '#5478A0',
+          400: '#7191B8',
+          300: '#9AB4D1',
+          200: '#C3D6EA',
+          100: '#E1E9F4',
+          50: '#F0F4F9',
         },
         grey: {
           900: '#1F2937',
@@ -26,14 +31,17 @@ export default {
           100: '#F9FAFB',
         },
         primary: {
-            DEFAULT: '#1A2F4F', // navy-800
-            hover: '#0B1F3F',   // navy-900
-            light: '#2D4A6E',   // navy-700
+          DEFAULT: '#1A2F4F', // navy-800
+          hover: '#0B1F3F',   // navy-900
+          light: '#2D4A6E',   // navy-700
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        outfit: ['Outfit', 'sans-serif'],
+        jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+        instrument: ['"Instrument Serif"', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       spacing: {
         '18': '4.5rem',

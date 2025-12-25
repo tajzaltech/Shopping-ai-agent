@@ -38,7 +38,7 @@
   }
 
   body {
-    @apply bg-grey-100 text-grey-900 font-sans antialiased;
+    @apply bg-grey-100 text-grey-900 font-jakarta antialiased selection:bg-navy-900/10 selection:text-navy-900;
   }
 
   h1,
@@ -47,29 +47,29 @@
   h4,
   h5,
   h6 {
-    @apply font-semibold text-navy-900;
+    @apply font-outfit font-semibold text-navy-900 tracking-tight;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-navy-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-navy-900 transition-all shadow-sm hover:shadow-md hover:-translate-y-px active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-navy-900 text-white px-8 py-4 rounded-[1.25rem] font-jakarta font-bold text-[11px] uppercase tracking-[0.2em] transition-all duration-300 shadow-xl shadow-navy-900/10 hover:shadow-navy-900/25 hover:-translate-y-1 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden relative;
   }
 
   .btn-secondary {
-    @apply bg-white text-navy-800 border border-navy-600 px-6 py-3 rounded-lg font-semibold hover:bg-grey-100 transition-all;
+    @apply bg-white text-navy-900 border-2 border-navy-900/5 px-8 py-4 rounded-[1.25rem] font-jakarta font-bold text-[11px] uppercase tracking-[0.2em] transition-all duration-300 hover:bg-navy-50/50 hover:border-navy-900/10 active:scale-95;
   }
 
   .input {
-    @apply w-full px-4 py-3 border-2 border-grey-400 rounded-lg text-grey-900 bg-white focus:outline-none focus:border-navy-600 focus:ring-4 focus:ring-navy-600/10 placeholder:text-grey-500 transition-all;
+    @apply w-full px-6 py-5 bg-white border border-navy-900/5 rounded-[1.25rem] font-jakarta text-sm font-medium text-navy-900 placeholder:text-grey-400 focus:outline-none focus:border-navy-900/20 focus:ring-[12px] focus:ring-navy-900/[0.03] transition-all duration-500 shadow-sm;
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-md border border-grey-200 p-6 transition-shadow hover:shadow-lg;
+    @apply bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0, 0, 0, 0.03)] border border-white/20 p-8 transition-all duration-500 hover:shadow-[0_48px_80px_-20px_rgba(0, 0, 0, 0.06)] hover:-translate-y-1;
   }
 
   .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    @apply inline-flex items-center px-4 py-1.5 rounded-full font-jakarta text-[10px] font-black uppercase tracking-widest;
   }
 }
 

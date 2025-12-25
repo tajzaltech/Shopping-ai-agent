@@ -108,8 +108,8 @@ const Home = () => {
             {/* Section 1: ChatGPT-Style Minimal Hero */}
             <section className="relative px-6 pt-32 pb-24 flex flex-col items-center text-center bg-white overflow-hidden">
                 <div className="relative z-10 max-w-4xl w-full flex flex-col items-center">
-                    <h1 className="text-4xl md:text-5xl font-bold text-navy-900 tracking-tight mb-12 animate-slide-up">
-                        Describe your perfect outfit
+                    <h1 className="text-5xl md:text-7xl font-outfit font-light text-navy-900 tracking-tight mb-12 animate-slide-up">
+                        Describe your <span className="font-bold">perfect</span> outfit
                     </h1>
 
                     <div className="w-full max-w-3xl relative animate-slide-up [animation-delay:0.1s]">
@@ -125,7 +125,7 @@ const Home = () => {
                                         }
                                     }}
                                     placeholder={placeholders[placeholderIndex]}
-                                    className="w-full pt-6 pb-20 pl-8 pr-16 bg-transparent border-none focus:ring-0 focus:outline-none text-lg text-navy-900 placeholder:text-grey-300 placeholder:font-medium resize-none min-h-[140px]"
+                                    className="w-full pt-8 pb-20 pl-10 pr-16 bg-transparent border-none focus:ring-0 focus:outline-none text-xl font-jakarta font-medium text-navy-900 placeholder:text-grey-300 placeholder:font-medium resize-none min-h-[160px]"
                                     rows={1}
                                 />
                                 <div className="absolute right-4 bottom-4 flex items-center gap-3">
@@ -145,7 +145,7 @@ const Home = () => {
                                     <button
                                         key={idx}
                                         type="button"
-                                        className="px-5 py-2 rounded-full border border-grey-200 bg-white text-[13px] font-medium text-grey-500 hover:bg-grey-50 hover:border-grey-300 transition-all"
+                                        className="px-6 py-2.5 rounded-full border border-grey-200 bg-white text-[11px] font-jakarta font-black uppercase tracking-[0.15em] text-grey-500 hover:bg-navy-900 hover:text-white hover:border-navy-900 transition-all duration-300"
                                     >
                                         {chip}
                                     </button>
@@ -162,7 +162,7 @@ const Home = () => {
                     {[...trendingTopics, ...trendingTopics].map((topic, i) => (
                         <div key={i} className="flex items-center gap-4 mx-12">
                             <div className="w-1.5 h-1.5 rounded-full bg-navy-900 shadow-[0_0_10px_rgba(10,25,47,0.3)]"></div>
-                            <span className="text-navy-900 font-black text-[11px] uppercase tracking-[0.2em]">{topic}</span>
+                            <span className="text-navy-900 font-jakarta font-black text-[10px] uppercase tracking-[0.3em]">{topic}</span>
                         </div>
                     ))}
                 </div>
@@ -172,8 +172,8 @@ const Home = () => {
             <section className="py-24 bg-grey-50/50">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16 animate-slide-up">
-                        <div className="text-[10px] font-black text-navy-400 uppercase tracking-widest mb-2">Curated for You</div>
-                        <h2 className="text-4xl font-black text-navy-900 tracking-tighter">Editor's Hot Picks</h2>
+                        <div className="text-[10px] font-jakarta font-black text-navy-400 uppercase tracking-[0.4em] mb-3">Curated for You</div>
+                        <h2 className="text-5xl font-outfit font-bold text-navy-900 tracking-tight">Editor's Hot Picks</h2>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -199,8 +199,8 @@ const Home = () => {
             <section className="py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-6 mb-12 flex items-end justify-between">
                     <div className="text-left animate-slide-up">
-                        <div className="text-[10px] font-black text-navy-400 uppercase tracking-widest mb-1">Pulse Feed</div>
-                        <h3 className="text-3xl font-black text-navy-900 leading-none">Style Chronicles</h3>
+                        <div className="text-[10px] font-jakarta font-black text-navy-400 uppercase tracking-[0.4em] mb-2">Pulse Feed</div>
+                        <h3 className="text-4xl font-outfit font-bold text-navy-900 leading-none">Style Chronicles</h3>
                     </div>
 
                 </div>
@@ -213,8 +213,8 @@ const Home = () => {
                                     <img src={article.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt={article.title} />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                                     <div className="absolute bottom-6 left-6 text-left whitespace-normal">
-                                        <span className="bg-white/20 backdrop-blur-md text-white text-[9px] font-black px-2.5 py-1 rounded uppercase tracking-[0.2em] mb-3 inline-block">{article.category}</span>
-                                        <h4 className="text-xl font-black text-white leading-tight">{article.title}</h4>
+                                        <span className="bg-white/20 backdrop-blur-md text-white text-[9px] font-jakarta font-black px-2.5 py-1 rounded uppercase tracking-[0.2em] mb-3 inline-block">{article.category}</span>
+                                        <h4 className="text-2xl font-outfit font-bold text-white leading-tight">{article.title}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -265,12 +265,12 @@ const Home = () => {
                             <div className="animate-fade-in key={activeLedger}">
                                 <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-navy-50 text-navy-900 mb-8 border border-navy-100">
                                     <span className="w-2 h-2 rounded-full bg-navy-900 animate-pulse"></span>
-                                    <span className="text-[10px] font-black uppercase tracking-[0.2em]">{ledgerArticles[activeLedger].tag}</span>
+                                    <span className="text-[10px] font-jakarta font-black uppercase tracking-[0.25em]">{ledgerArticles[activeLedger].tag}</span>
                                 </div>
-                                <h3 className="text-5xl font-black text-navy-900 tracking-tight leading-[0.95] mb-8 transition-transform duration-700">
+                                <h3 className="text-6xl font-outfit font-bold text-navy-900 tracking-tight leading-[0.9] mb-8 transition-transform duration-700">
                                     {ledgerArticles[activeLedger].title}
                                 </h3>
-                                <p className="text-xl font-medium text-grey-500 leading-relaxed mb-10 min-h-[100px]">
+                                <p className="text-xl font-jakarta font-medium text-grey-500 leading-relaxed mb-10 min-h-[100px]">
                                     {ledgerArticles[activeLedger].description}
                                 </p>
                                 <button className="group flex items-center gap-4 text-navy-900 font-black text-sm uppercase tracking-widest hover:gap-6 transition-all duration-300">
@@ -298,10 +298,10 @@ const Home = () => {
 
                 <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
                     <div className="mb-12 animate-fade-in">
-                        <h2 className="text-6xl md:text-8xl font-black text-white tracking-tight leading-none mb-6">
+                        <h2 className="text-6xl md:text-8xl font-outfit font-bold text-white tracking-tighter leading-none mb-8">
                             STYLE <span className="text-transparent border-t border-b border-white/30 backdrop-blur-sm px-4">BEYOND</span> REALITY.
                         </h2>
-                        <p className="text-white text-xl font-bold max-w-2xl mx-auto leading-relaxed">Step into the future of automated personal styling where every pixel is tailored to your DNA.</p>
+                        <p className="text-white text-xl font-jakarta font-bold max-w-2xl mx-auto leading-relaxed">Step into the future of automated personal styling where every pixel is tailored to your DNA.</p>
                     </div>
 
                     <div className="relative inline-block group">
@@ -334,10 +334,10 @@ const Home = () => {
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                         <div className="col-span-1 md:col-span-1 space-y-6">
                             <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 bg-navy-900 rounded-lg flex items-center justify-center">
-                                    <Sparkles className="w-4 h-4 text-white" />
+                                <div className="w-10 h-10 bg-navy-900 rounded-xl flex items-center justify-center">
+                                    <Sparkles className="w-5 h-5 text-white" />
                                 </div>
-                                <span className="text-xl font-black tracking-tight text-navy-900 uppercase">StylistAI</span>
+                                <span className="text-2xl font-outfit font-bold tracking-tight text-navy-900">StylistAI</span>
                             </div>
                             <p className="text-sm text-grey-500 leading-relaxed">Pioneering the future of fashion AI. Your personal stylist reborn through data.</p>
                         </div>
