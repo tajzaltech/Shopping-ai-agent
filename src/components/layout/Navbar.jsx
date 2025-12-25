@@ -24,15 +24,15 @@ const Navbar = () => {
                     {/* Logo */}
                     <div className="flex items-center">
                         <Link to="/" className="flex-shrink-0 flex items-center gap-2">
-                            <div className="w-7.5 h-7.5 bg-navy-800 rounded-lg flex items-center justify-center">
-                                <ShoppingBag className="w-4.5 h-4.5 text-white" />
+                            <div className="w-8 h-8 bg-navy-800 rounded-lg flex items-center justify-center">
+                                <ShoppingBag className="w-5 h-5 text-white" />
                             </div>
-                            <span className="text-lg font-bold text-navy-900">Stylist<span className="text-navy-600">AI</span></span>
+                            <span className="text-xl font-extrabold text-navy-900">Stylist<span className="text-navy-600">AI</span></span>
                         </Link>
                     </div>
 
                     {/* Right side icons */}
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
                         {/* Chat */}
                         <Link
                             to="/chat"
@@ -49,23 +49,23 @@ const Navbar = () => {
                             <Tag className="w-5.5 h-5.5" />
                         </Link>
 
-                        {/* Find a Store */}
+                        {/* Find a Store - Hide on mobile */}
                         <Link
                             to="/stores"
-                            className={`p-1.5 rounded-lg transition-colors ${location.pathname === '/stores' ? 'bg-navy-100 text-navy-800' : 'text-grey-600 hover:text-navy-800 hover:bg-grey-100'}`}
+                            className={`hidden sm:flex p-1.5 rounded-lg transition-colors ${location.pathname === '/stores' ? 'bg-navy-100 text-navy-800' : 'text-grey-600 hover:text-navy-800 hover:bg-grey-100'}`}
                         >
                             <MapPin className="w-5.5 h-5.5" />
                         </Link>
 
-                        {/* Wishlist */}
+                        {/* Wishlist - Hide on mobile */}
                         <Link
                             to="/wishlist"
-                            className={`p-1.5 rounded-lg transition-colors ${location.pathname === '/wishlist' ? 'bg-red-50 text-red-500' : 'text-grey-600 hover:text-red-500 hover:bg-grey-100'}`}
+                            className={`hidden sm:flex p-1.5 rounded-lg transition-colors ${location.pathname === '/wishlist' ? 'bg-red-50 text-red-500' : 'text-grey-600 hover:text-red-500 hover:bg-grey-100'}`}
                         >
                             <Heart className="w-5.5 h-5.5" />
                         </Link>
 
-                        <div className="h-5 w-px bg-grey-200 mx-1"></div>
+                        <div className="h-5 w-px bg-grey-200 mx-1 sm:mx-2 hidden sm:block"></div>
 
                         {/* Profile / Auth */}
                         {user ? (

@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 @layer base {
+
   :root {
     /* Colors */
     --navy-900: #0B1F3F;
@@ -53,19 +65,19 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-navy-900 text-white px-8 py-4 rounded-[1.25rem] font-jakarta font-bold text-[11px] uppercase tracking-[0.2em] transition-all duration-300 shadow-xl shadow-navy-900/10 hover:shadow-navy-900/25 hover:-translate-y-1 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden relative;
+    @apply bg-navy-900 text-white px-6 py-3.5 md:px-8 md:py-4 rounded-2xl md:rounded-[1.25rem] font-jakarta font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] transition-all duration-300 shadow-xl shadow-navy-900/10 hover:shadow-navy-900/25 hover:-translate-y-1 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden relative;
   }
 
   .btn-secondary {
-    @apply bg-white text-navy-900 border-2 border-navy-900/5 px-8 py-4 rounded-[1.25rem] font-jakarta font-bold text-[11px] uppercase tracking-[0.2em] transition-all duration-300 hover:bg-navy-50/50 hover:border-navy-900/10 active:scale-95;
+    @apply bg-white text-navy-900 border-2 border-navy-900/5 px-6 py-3.5 md:px-8 md:py-4 rounded-2xl md:rounded-[1.25rem] font-jakarta font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] transition-all duration-300 hover:bg-navy-50/50 hover:border-navy-900/10 active:scale-95;
   }
 
   .input {
-    @apply w-full px-6 py-5 bg-white border border-navy-900/5 rounded-[1.25rem] font-jakarta text-sm font-medium text-navy-900 placeholder:text-grey-400 focus:outline-none focus:border-navy-900/20 focus:ring-[12px] focus:ring-navy-900/[0.03] transition-all duration-500 shadow-sm;
+    @apply w-full px-5 py-4 md:px-6 md:py-5 bg-white border border-navy-900/5 rounded-2xl md:rounded-[1.25rem] font-jakarta text-sm font-medium text-navy-900 placeholder:text-grey-400 focus:outline-none focus:border-navy-900/20 focus:ring-[12px] focus:ring-navy-900/[0.03] transition-all duration-500 shadow-sm;
   }
 
   .card {
-    @apply bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0, 0, 0, 0.03)] border border-white/20 p-8 transition-all duration-500 hover:shadow-[0_48px_80px_-20px_rgba(0, 0, 0, 0.06)] hover:-translate-y-1;
+    @apply bg-white/80 backdrop-blur-xl rounded-[1.5rem] md:rounded-[2.5rem] shadow-card border border-white/20 p-5 md:p-8 transition-all duration-500 hover:shadow-card-hover hover:-translate-y-1;
   }
 
   .badge {

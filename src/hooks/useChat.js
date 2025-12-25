@@ -19,7 +19,7 @@ export const useChat = () => {
         const newChat = {
             id: newChatId,
             title: (typeof initialPrompt === 'string') ? (initialPrompt.slice(0, 30) + (initialPrompt.length > 30 ? '...' : '')) : 'New Chat',
-            date: 'Just now',
+            date: new Date().toLocaleDateString(),
             messages: []
         };
 
@@ -37,7 +37,10 @@ export const useChat = () => {
     useEffect(() => {
         const savedHistory = localStorage.getItem('chat-history');
         if (savedHistory) {
-            const history = JSON.parse(savedHistory);
+            const history = JSON.parse(savedHistory).map(chat => ({
+                ...chat,
+                date: chat.date === 'Just now' ? new Date().toLocaleDateString() : chat.date
+            }));
             setChatHistory(history);
             if (history.length > 0) {
                 setCurrentChatId(history[0].id);
@@ -58,7 +61,12 @@ export const useChat = () => {
                 if (chat.id === currentChatId) {
                     const firstUserMsg = newMessages.find(m => m.role === 'user');
                     const newTitle = firstUserMsg ? (firstUserMsg.content.slice(0, 30) + (firstUserMsg.content.length > 30 ? '...' : '')) : chat.title;
-                    return { ...chat, messages: newMessages, title: newTitle || 'New Chat' };
+                    return {
+                        ...chat,
+                        messages: newMessages,
+                        title: newTitle || 'New Chat',
+                        date: chat.date || new Date().toLocaleDateString()
+                    };
                 }
                 return chat;
             });
@@ -131,13 +139,18 @@ export const useChat = () => {
         }
     ];
 
-    const sendMessage = useCallback((content) => {
-        if (!content.trim()) return;
+    const sendMessage = useCallback((input) => {
+        const isObject = typeof input === 'object' && input !== null;
+        const content = isObject ? input.content : input;
+
+        if (!content && !isObject) return;
 
         const userMsg = {
             id: generateId(),
             role: 'user',
-            content,
+            content: content || (input.type === 'image' ? "Image uploaded" : "Voice message"),
+            imageUrl: input.type === 'image' ? input.content : null,
+            isVoice: input.type === 'voice',
             timestamp: new Date()
         };
 

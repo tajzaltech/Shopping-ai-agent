@@ -27,6 +27,10 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
+  React.useEffect(() => {
+    document.title = "AI Shopping Agent";
+  }, []);
+
   return (
     <Routes>
       <Route element={<Layout />}>

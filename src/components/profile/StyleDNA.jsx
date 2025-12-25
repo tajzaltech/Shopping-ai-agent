@@ -27,9 +27,12 @@ const StyleDNA = () => {
     const pathData = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ') + ' Z';
 
     return (
-        <div className="flex flex-col items-center justify-center space-y-8 p-6">
-            <div className="relative">
-                <svg width={size} height={size} className="overflow-visible">
+        <div className="flex flex-col items-center justify-center space-y-8 p-4 md:p-6 w-full max-w-sm mx-auto">
+            <div className="relative w-full aspect-square max-w-[300px]">
+                <svg
+                    viewBox={`0 0 ${size} ${size}`}
+                    className="w-full h-full overflow-visible"
+                >
                     {/* Background Circles */}
                     {[0.2, 0.4, 0.6, 0.8, 1].map((step) => (
                         <circle

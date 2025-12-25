@@ -49,13 +49,13 @@ const Profile = () => {
                     {/* Legendary Header */}
                     <div className="text-center space-y-8 animate-fade-in">
                         <div className="relative inline-block">
-                            <div className="w-40 h-40 bg-white rounded-full flex items-center justify-center text-6xl font-light font-outfit text-navy-900 border border-grey-100 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] mx-auto relative overflow-hidden group">
+                            <div className="w-28 h-28 md:w-40 md:h-40 bg-white rounded-full flex items-center justify-center text-4xl md:text-6xl font-light font-outfit text-navy-900 border border-grey-100 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] mx-auto relative overflow-hidden group">
                                 <div className="absolute inset-0 bg-gradient-to-tr from-navy-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                 {user?.name?.charAt(0) || 'S'}
                             </div>
                             {user?.isVerified && (
-                                <div className="absolute bottom-2 right-2 bg-white rounded-full p-2.5 shadow-xl border border-grey-100">
-                                    <ShieldCheck className="w-6 h-6 text-navy-900 fill-navy-50" />
+                                <div className="absolute bottom-1 right-1 md:bottom-2 md:right-2 bg-white rounded-full p-2 md:p-2.5 shadow-xl border border-grey-100">
+                                    <ShieldCheck className="w-4 h-4 md:w-6 md:h-6 text-navy-900 fill-navy-50" />
                                 </div>
                             )}
                         </div>
@@ -75,7 +75,7 @@ const Profile = () => {
                     </div>
 
                     {/* Style DNA Radar Chart Section */}
-                    <div className="bg-white/40 backdrop-blur-3xl border border-white rounded-[4rem] p-12 shadow-[0_32px_80px_-20px_rgba(0,0,0,0.04)] animate-slide-up">
+                    <div className="bg-white/40 backdrop-blur-3xl border border-white rounded-[2rem] md:rounded-[4rem] p-6 md:p-12 shadow-[0_32px_80px_-20px_rgba(0,0,0,0.04)] animate-slide-up">
                         <div className="flex flex-col md:flex-row items-center gap-12">
                             <div className="flex-1 space-y-6">
                                 <div className="flex items-center gap-3">
@@ -102,13 +102,13 @@ const Profile = () => {
 
                         {/* Status/Feedback Header */}
                         <div className="flex items-center justify-between px-2">
-                            <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-[1.5rem] bg-white border border-grey-100 flex items-center justify-center shadow-sm">
-                                    <Settings className="w-7 h-7 text-navy-900" />
+                            <div className="flex items-center gap-3 md:gap-4">
+                                <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl md:rounded-[1.5rem] bg-white border border-grey-100 flex items-center justify-center shadow-sm">
+                                    <Settings className="w-6 h-6 md:w-7 md:h-7 text-navy-900" />
                                 </div>
                                 <div>
-                                    <h2 className="text-lg font-outfit font-bold text-navy-900">Vault Access</h2>
-                                    <p className="text-[10px] font-black text-navy-900/30 uppercase tracking-[0.2em] mt-0.5">Edit Personal Records</p>
+                                    <h2 className="text-base md:text-lg font-outfit font-bold text-navy-900">Vault Access</h2>
+                                    <p className="text-[9px] md:text-[10px] font-black text-navy-900/30 uppercase tracking-[0.2em] mt-0.5">Edit Personal Records</p>
                                 </div>
                             </div>
 
@@ -121,26 +121,26 @@ const Profile = () => {
                         </div>
 
                         {/* Identity Section */}
-                        <div className="bg-white/80 backdrop-blur-3xl border border-white rounded-[3.5rem] p-12 shadow-[0_32px_64px_-24px_rgba(0,0,0,0.04)] hover:shadow-[0_48px_80px_-24px_rgba(0,0,0,0.08)] transition-all duration-700">
-                            <form onSubmit={handleUpdateProfile} className="space-y-12">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                    <div className="space-y-4 px-2">
+                        <div className="bg-white/80 backdrop-blur-3xl border border-white rounded-[2rem] md:rounded-[3.5rem] p-6 md:p-12 shadow-[0_32px_64px_-24px_rgba(0,0,0,0.04)] hover:shadow-[0_48px_80px_-24px_rgba(0,0,0,0.08)] transition-all duration-700">
+                            <form onSubmit={handleUpdateProfile} className="space-y-8 md:space-y-12">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+                                    <div className="space-y-3 md:space-y-4 px-2">
                                         <label className="text-[10px] font-black text-navy-900/30 uppercase tracking-[0.3em] ml-2">Legacy Name</label>
                                         <input
                                             type="text"
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
-                                            className="w-full px-8 py-5.5 bg-grey-50/50 border border-navy-900/5 rounded-3xl font-jakarta text-sm font-semibold text-navy-900 focus:bg-white focus:border-navy-900/10 focus:ring-12 focus:ring-navy-900/[0.02] transition-all outline-none"
+                                            className="input"
                                             placeholder="Your Name"
                                         />
                                     </div>
-                                    <div className="space-y-4 px-2">
+                                    <div className="space-y-3 md:space-y-4 px-2">
                                         <label className="text-[10px] font-black text-navy-900/30 uppercase tracking-[0.3em] ml-2">Encrypted Email</label>
                                         <input
                                             type="email"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            className="w-full px-8 py-5.5 bg-grey-50/50 border border-navy-900/5 rounded-3xl font-jakarta text-sm font-semibold text-navy-900 focus:bg-white focus:border-navy-900/10 focus:ring-12 focus:ring-navy-900/[0.02] transition-all outline-none"
+                                            className="input"
                                             placeholder="Email Address"
                                         />
                                     </div>
@@ -153,26 +153,26 @@ const Profile = () => {
                         </div>
 
                         {/* Security Section */}
-                        <div className="bg-white/80 backdrop-blur-3xl border border-white rounded-[3.5rem] p-12 shadow-[0_32px_64px_-24px_rgba(0,0,0,0.04)] hover:shadow-[0_48px_80px_-24px_rgba(0,0,0,0.08)] transition-all duration-700">
-                            <form onSubmit={handleChangePassword} className="space-y-12">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                    <div className="space-y-4 px-2">
+                        <div className="bg-white/80 backdrop-blur-3xl border border-white rounded-[2rem] md:rounded-[3.5rem] p-6 md:p-12 shadow-[0_32px_64px_-24px_rgba(0,0,0,0.04)] hover:shadow-[0_48px_80px_-24px_rgba(0,0,0,0.08)] transition-all duration-700">
+                            <form onSubmit={handleChangePassword} className="space-y-8 md:space-y-12">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+                                    <div className="space-y-3 md:space-y-4 px-2">
                                         <label className="text-[10px] font-black text-navy-900/30 uppercase tracking-[0.3em] ml-2">New Access Key</label>
                                         <input
                                             type="password"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
-                                            className="w-full px-8 py-5.5 bg-grey-50/50 border border-navy-900/5 rounded-3xl font-jakarta text-sm font-semibold text-navy-900 focus:bg-white focus:border-navy-900/10 focus:ring-12 focus:ring-navy-900/[0.02] transition-all outline-none"
+                                            className="input"
                                             placeholder="••••••••"
                                         />
                                     </div>
-                                    <div className="space-y-4 px-2">
+                                    <div className="space-y-3 md:space-y-4 px-2">
                                         <label className="text-[10px] font-black text-navy-900/30 uppercase tracking-[0.3em] ml-2">Confirm Identity</label>
                                         <input
                                             type="password"
                                             value={confirmPassword}
                                             onChange={(e) => setConfirmPassword(e.target.value)}
-                                            className="w-full px-8 py-5.5 bg-grey-50/50 border border-navy-900/5 rounded-3xl font-jakarta text-sm font-semibold text-navy-900 focus:bg-white focus:border-navy-900/10 focus:ring-12 focus:ring-navy-900/[0.02] transition-all outline-none"
+                                            className="input"
                                             placeholder="••••••••"
                                         />
                                     </div>
@@ -185,12 +185,12 @@ const Profile = () => {
                         </div>
 
                         {/* Logout - Bottom Center */}
-                        <div className="pt-6">
+                        <div className="pt-4 md:pt-6">
                             <button
                                 onClick={logout}
-                                className="w-full py-8 bg-white border border-red-50 text-red-500 rounded-[3rem] text-[11px] font-black uppercase tracking-[0.3em] hover:bg-red-50/50 transition-all active:scale-[0.99] flex items-center justify-center gap-4 group shadow-sm hover:shadow-md"
+                                className="w-full py-5 md:py-8 bg-white border border-red-50 text-red-500 rounded-[2rem] md:rounded-[3rem] text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] hover:bg-red-50/50 transition-all active:scale-[0.99] flex items-center justify-center gap-4 group shadow-sm hover:shadow-md"
                             >
-                                <LogOut className="w-5 h-5 opacity-40 group-hover:opacity-100 transition-opacity" />
+                                <LogOut className="w-4 h-4 md:w-5 md:h-5 opacity-40 group-hover:opacity-100 transition-opacity" />
                                 <span>Logout Curator Session</span>
                             </button>
                         </div>
@@ -198,13 +198,13 @@ const Profile = () => {
                 </div>
 
                 {/* Footer Signature */}
-                <div className="mt-32 text-center animate-fade-in [animation-delay:0.5s]">
+                <div className="mt-16 md:mt-32 text-center animate-fade-in [animation-delay:0.5s]">
                     <div className="flex items-center justify-center gap-4 opacity-10">
-                        <div className="h-px w-20 bg-navy-900" />
-                        <span className="text-[10px] font-black text-navy-900 uppercase tracking-[0.8em]">StylistAI</span>
-                        <div className="h-px w-20 bg-navy-900" />
+                        <div className="h-px w-10 md:w-20 bg-navy-900" />
+                        <span className="text-[10px] font-black text-navy-900 uppercase tracking-[0.4em] md:tracking-[0.8em]">StylistAI</span>
+                        <div className="h-px w-10 md:w-20 bg-navy-900" />
                     </div>
-                    <p className="mt-4 text-[9px] font-semibold text-navy-900/20 uppercase tracking-[0.3em]">
+                    <p className="mt-4 text-[8px] md:text-[9px] font-semibold text-navy-900/20 uppercase tracking-[0.2em] md:tracking-[0.3em]">
                         Privacy Protected Intelligence Systems
                     </p>
                 </div>

@@ -61,15 +61,15 @@ const VerifyEmail = () => {
     };
 
     return (
-        <div className="min-h-screen bg-grey-50 flex items-center justify-center p-6">
-            <div className="w-full max-w-md bg-white rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border border-grey-100 p-10 text-center animate-slide-up">
-                <div className="w-20 h-20 bg-navy-50 rounded-3xl flex items-center justify-center mx-auto mb-8">
-                    <Mail className="w-10 h-10 text-navy-900" />
+        <div className="min-h-screen bg-grey-50 flex items-center justify-center p-6 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px]">
+            <div className="w-full max-w-md bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border border-grey-100 p-6 sm:p-10 text-center animate-slide-up">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-navy-50 rounded-2xl md:rounded-3xl flex items-center justify-center mx-auto mb-6 md:mb-8">
+                    <Mail className="w-8 h-8 md:w-10 md:h-10 text-navy-900" />
                 </div>
 
-                <div className="space-y-3 mb-10">
-                    <h1 className="text-3xl font-black text-navy-900 tracking-tight">Check your email</h1>
-                    <p className="text-grey-500 font-medium leading-relaxed">
+                <div className="space-y-2 md:space-y-3 mb-8 md:mb-10">
+                    <h1 className="text-2xl md:text-3xl font-black text-navy-900 tracking-tight">Check your email</h1>
+                    <p className="text-sm md:text-base text-grey-500 font-medium leading-relaxed">
                         We've sent a 6-digit verification code to <br />
                         <span className="text-navy-900 font-bold">{user?.email || 'your email'}</span>
                     </p>
@@ -81,8 +81,8 @@ const VerifyEmail = () => {
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-8">
-                    <div className="flex justify-between gap-2">
+                <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
+                    <div className="flex justify-between gap-1.5 md:gap-2">
                         {code.map((digit, index) => (
                             <input
                                 key={index}
@@ -92,7 +92,7 @@ const VerifyEmail = () => {
                                 value={digit}
                                 onChange={(e) => handleChange(index, e.target.value)}
                                 onKeyDown={(e) => handleKeyDown(index, e)}
-                                className="w-12 h-16 text-center text-2xl font-black bg-grey-50 border border-grey-200 rounded-2xl focus:ring-4 focus:ring-navy-500/10 focus:border-navy-500 transition-all text-navy-900 placeholder:text-grey-300"
+                                className="w-10 h-14 md:w-12 md:h-16 text-center text-xl md:text-2xl font-black bg-grey-50 border border-grey-200 rounded-xl md:rounded-2xl focus:ring-4 focus:ring-navy-500/10 focus:border-navy-500 transition-all text-navy-900 placeholder:text-grey-300"
                                 required
                             />
                         ))}

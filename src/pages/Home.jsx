@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     ArrowRight, Sparkles, Search, Shirt, Send, Camera, Mic, ArrowUp,
@@ -96,6 +96,67 @@ const Home = () => {
         return () => clearInterval(timer);
     }, []);
 
+    const carouselRef = useRef(null);
+
+    // Initialize carousel position to the middle buffer
+    useEffect(() => {
+        const carousel = carouselRef.current;
+        if (carousel && carouselArticles.length > 0) {
+            const card = carousel.querySelector('.snap-start');
+            if (card) {
+                const cardWidth = card.offsetWidth;
+                const gap = window.innerWidth >= 768 ? 24 : 16;
+                const initialScroll = (cardWidth + gap) * carouselArticles.length;
+                carousel.scrollLeft = initialScroll;
+            }
+        }
+    }, [carouselArticles.length]);
+
+    useEffect(() => {
+        const carousel = carouselRef.current;
+        if (!carousel) return;
+
+        let animationFrameId;
+        const scrollSpeed = 0.5; // Constant speed
+
+        const animate = () => {
+            if (!carousel) return;
+
+            // Increment scroll
+            carousel.scrollLeft += scrollSpeed;
+
+            // Infinite loop check
+            const card = carousel.querySelector('.snap-start');
+            if (card) {
+                const unitWidth = (card.offsetWidth + (window.innerWidth >= 768 ? 24 : 16)) * carouselArticles.length;
+                if (carousel.scrollLeft >= unitWidth * 2) {
+                    carousel.scrollLeft -= unitWidth;
+                } else if (carousel.scrollLeft <= unitWidth * 0.5) {
+                    carousel.scrollLeft += unitWidth;
+                }
+            }
+
+            animationFrameId = requestAnimationFrame(animate);
+        };
+
+        animationFrameId = requestAnimationFrame(animate);
+
+        // Optional: Pause on hover
+        const handleMouseEnter = () => cancelAnimationFrame(animationFrameId);
+        const handleMouseLeave = () => {
+            animationFrameId = requestAnimationFrame(animate);
+        };
+
+        carousel.addEventListener('mouseenter', handleMouseEnter);
+        carousel.addEventListener('mouseleave', handleMouseLeave);
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            carousel.removeEventListener('mouseenter', handleMouseEnter);
+            carousel.removeEventListener('mouseleave', handleMouseLeave);
+        };
+    }, [carouselArticles.length]);
+
     const insights = [
         { label: "Fabric of the Month", value: "Premium Chiffon", trend: "+24% demand" },
         { label: "Most Searched Color", value: "Emerald Green", trend: "Trending Now" },
@@ -108,7 +169,7 @@ const Home = () => {
             {/* Section 1: ChatGPT-Style Minimal Hero */}
             <section className="relative px-6 pt-32 pb-24 flex flex-col items-center text-center bg-white overflow-hidden">
                 <div className="relative z-10 max-w-4xl w-full flex flex-col items-center">
-                    <h1 className="text-5xl md:text-7xl font-outfit font-light text-navy-900 tracking-tight mb-12 animate-slide-up">
+                    <h1 className="text-4xl sm:text-5xl md:text-7xl font-outfit font-light text-navy-900 tracking-tight mb-8 md:mb-12 animate-slide-up">
                         Describe your <span className="font-bold">perfect</span> outfit
                     </h1>
 
@@ -125,7 +186,7 @@ const Home = () => {
                                         }
                                     }}
                                     placeholder={placeholders[placeholderIndex]}
-                                    className="w-full pt-8 pb-20 pl-10 pr-16 bg-transparent border-none focus:ring-0 focus:outline-none text-xl font-jakarta font-medium text-navy-900 placeholder:text-grey-300 placeholder:font-medium resize-none min-h-[160px]"
+                                    className="w-full pt-6 md:pt-8 pb-16 md:pb-20 pl-6 md:pl-10 pr-16 bg-transparent border-none focus:ring-0 focus:outline-none text-base md:text-xl font-jakarta font-medium text-navy-900 placeholder:text-grey-300 placeholder:font-medium resize-none min-h-[120px] md:min-h-[160px]"
                                     rows={1}
                                 />
                                 <div className="absolute right-4 bottom-4 flex items-center gap-3">
@@ -200,21 +261,24 @@ const Home = () => {
                 <div className="max-w-7xl mx-auto px-6 mb-12 flex items-end justify-between">
                     <div className="text-left animate-slide-up">
                         <div className="text-[10px] font-jakarta font-black text-navy-400 uppercase tracking-[0.4em] mb-2">Pulse Feed</div>
-                        <h3 className="text-4xl font-outfit font-bold text-navy-900 leading-none">Style Chronicles</h3>
+                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-outfit font-bold text-navy-900 leading-none">Style Chronicles</h3>
                     </div>
 
                 </div>
 
                 <div className="overflow-hidden">
-                    <div className="flex gap-6 px-6 lg:px-24 animate-marquee whitespace-nowrap pb-8 hover:cursor-grab active:cursor-grabbing">
-                        {[...carouselArticles, ...carouselArticles].map((article, i) => (
-                            <div key={i} className="min-w-[380px] group relative bg-white rounded-3xl overflow-hidden border border-grey-100 shadow-sm hover:shadow-2xl transition-all duration-700 inline-block">
-                                <div className="h-64 relative overflow-hidden">
+                    <div
+                        ref={carouselRef}
+                        className="flex gap-4 md:gap-6 px-4 md:px-24 overflow-x-auto no-scrollbar pb-8"
+                    >
+                        {[...carouselArticles, ...carouselArticles, ...carouselArticles].map((article, i) => (
+                            <div key={i} className="min-w-[240px] md:min-w-[380px] snap-start group relative bg-white rounded-3xl overflow-hidden border border-grey-100 shadow-sm hover:shadow-2xl transition-all duration-700 inline-block">
+                                <div className="h-48 md:h-64 relative overflow-hidden">
                                     <img src={article.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt={article.title} />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                                    <div className="absolute bottom-6 left-6 text-left whitespace-normal">
-                                        <span className="bg-white/20 backdrop-blur-md text-white text-[9px] font-jakarta font-black px-2.5 py-1 rounded uppercase tracking-[0.2em] mb-3 inline-block">{article.category}</span>
-                                        <h4 className="text-2xl font-outfit font-bold text-white leading-tight">{article.title}</h4>
+                                    <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 text-left whitespace-normal pr-4">
+                                        <span className="bg-white/20 backdrop-blur-md text-white text-[8px] md:text-[9px] font-jakarta font-black px-2.5 py-1 rounded uppercase tracking-[0.2em] mb-2 md:mb-3 inline-block">{article.category}</span>
+                                        <h4 className="text-lg md:text-2xl font-outfit font-bold text-white leading-tight">{article.title}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -263,14 +327,14 @@ const Home = () => {
                         {/* Content Side */}
                         <div className="w-full lg:w-2/5 text-left space-y-10 relative">
                             <div className="animate-fade-in key={activeLedger}">
-                                <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-navy-50 text-navy-900 mb-8 border border-navy-100">
+                                <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-navy-50 text-navy-900 mb-6 md:mb-8 border border-navy-100">
                                     <span className="w-2 h-2 rounded-full bg-navy-900 animate-pulse"></span>
                                     <span className="text-[10px] font-jakarta font-black uppercase tracking-[0.25em]">{ledgerArticles[activeLedger].tag}</span>
                                 </div>
-                                <h3 className="text-6xl font-outfit font-bold text-navy-900 tracking-tight leading-[0.9] mb-8 transition-transform duration-700">
+                                <h3 className="text-4xl md:text-6xl font-outfit font-bold text-navy-900 tracking-tight leading-[0.9] mb-6 md:mb-8 transition-transform duration-700">
                                     {ledgerArticles[activeLedger].title}
                                 </h3>
-                                <p className="text-xl font-jakarta font-medium text-grey-500 leading-relaxed mb-10 min-h-[100px]">
+                                <p className="text-lg md:text-xl font-jakarta font-medium text-grey-500 leading-relaxed mb-8 md:mb-10 min-h-[80px] md:min-h-[100px]">
                                     {ledgerArticles[activeLedger].description}
                                 </p>
                                 <button className="group flex items-center gap-4 text-navy-900 font-black text-sm uppercase tracking-widest hover:gap-6 transition-all duration-300">
@@ -298,10 +362,10 @@ const Home = () => {
 
                 <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
                     <div className="mb-12 animate-fade-in">
-                        <h2 className="text-6xl md:text-8xl font-outfit font-bold text-white tracking-tighter leading-none mb-8">
+                        <h2 className="text-4xl sm:text-6xl md:text-8xl font-outfit font-bold text-white tracking-tighter leading-none mb-6 md:mb-8">
                             STYLE <span className="text-transparent border-t border-b border-white/30 backdrop-blur-sm px-4">BEYOND</span> REALITY.
                         </h2>
-                        <p className="text-white text-xl font-jakarta font-bold max-w-2xl mx-auto leading-relaxed">Step into the future of automated personal styling where every pixel is tailored to your DNA.</p>
+                        <p className="text-white text-lg md:text-xl font-jakarta font-bold max-w-2xl mx-auto leading-relaxed px-4">Step into the future of automated personal styling where every pixel is tailored to your DNA.</p>
                     </div>
 
                     <div className="relative inline-block group">

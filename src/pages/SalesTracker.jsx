@@ -91,32 +91,32 @@ const SalesTracker = () => {
     return (
         <div className="min-h-screen bg-white pt-20 pb-12">
             {/* Elite White Header Section */}
-            <div className="bg-white py-16 px-6">
+            <div className="bg-white py-8 md:py-16 px-6">
                 <div className="max-w-7xl mx-auto space-y-6">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-grey-100 pb-12">
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-3 text-grey-400 font-bold tracking-[0.2em] text-[10px] uppercase">
-                                <Clock className="w-4 h-4" />
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 border-b border-grey-100 pb-8 md:pb-12">
+                        <div className="space-y-3 md:space-y-4">
+                            <div className="flex items-center gap-2 md:gap-3 text-grey-400 font-bold tracking-[0.2em] text-[9px] md:text-[10px] uppercase">
+                                <Clock className="w-3.5 h-3.5 md:w-4 md:h-4" />
                                 Updated 2 minutes ago
                             </div>
-                            <h1 className="text-5xl md:text-7xl font-light text-navy-900 tracking-tight leading-[1.1]">
+                            <h1 className="text-4xl md:text-7xl font-light text-navy-900 tracking-tight leading-[1.1]">
                                 The Curated <br /><span className="font-serif italic text-navy-800">Sales Ledger</span>
                             </h1>
-                            <p className="text-grey-500 font-medium text-lg max-w-xl leading-relaxed">
+                            <p className="text-grey-500 font-medium text-base md:text-lg max-w-xl leading-relaxed">
                                 A definitive collection of premium articles currently on sale across major Pakistani brands, curated for the modern identity.
                             </p>
                         </div>
                     </div>
 
                     {/* Brand Filter Row */}
-                    <div className="flex items-center gap-3 overflow-x-auto py-8 scrollbar-none">
-                        <span className="text-[10px] font-bold text-grey-400 uppercase tracking-widest mr-4">Filter by Brand</span>
+                    <div className="flex items-center gap-2 md:gap-3 overflow-x-auto py-6 md:py-8 scrollbar-none no-scrollbar">
+                        <span className="text-[9px] md:text-[10px] font-bold text-grey-400 uppercase tracking-widest mr-2 md:mr-4 shrink-0">Filter by Brand</span>
                         {brands.map((brand) => (
                             <button
                                 key={brand}
                                 onClick={() => setSelectedBrand(brand)}
                                 className={cn(
-                                    "px-8 py-3 rounded-full text-xs font-bold transition-all whitespace-nowrap border",
+                                    "px-5 md:px-8 py-2 md:py-3 rounded-full text-[10px] md:text-xs font-bold transition-all whitespace-nowrap border",
                                     selectedBrand === brand
                                         ? "bg-navy-900 border-navy-900 text-white shadow-xl shadow-navy-900/10"
                                         : "bg-white border-grey-100 text-grey-500 hover:border-grey-300 hover:text-navy-900"
@@ -130,11 +130,11 @@ const SalesTracker = () => {
             </div>
 
             {/* Main Content Grid */}
-            <div className="max-w-7xl mx-auto px-6 mt-16">
-                <div className="flex items-center justify-between mb-12">
+            <div className="max-w-7xl mx-auto px-6 mt-8 md:mt-16">
+                <div className="flex items-center justify-between mb-8 md:mb-12">
                     <div className="space-y-1">
-                        <h2 className="text-2xl font-light text-navy-900 tracking-tight uppercase">Article Discovery</h2>
-                        <div className="h-px w-20 bg-navy-900"></div>
+                        <h2 className="text-xl md:text-2xl font-light text-navy-900 tracking-tight uppercase">Article Discovery</h2>
+                        <div className="h-px w-16 md:w-20 bg-navy-900"></div>
                     </div>
                 </div>
 
@@ -194,30 +194,30 @@ const SalesTracker = () => {
                 </div>
 
                 {/* Bottom Sales Summary - Neat & Clean */}
-                <div className="mt-20 flex flex-col md:flex-row gap-8">
-                    <div className="flex-1 bg-white p-10 rounded-[2rem] border border-grey-100 flex items-center gap-8">
-                        <div className="w-16 h-16 bg-navy-50 rounded-full flex items-center justify-center shrink-0">
-                            <Tag className="w-6 h-6 text-navy-900" />
+                <div className="mt-12 md:mt-20 flex flex-col md:flex-row gap-6 md:gap-8">
+                    <div className="flex-1 bg-white p-6 md:p-10 rounded-3xl md:rounded-[2rem] border border-grey-100 flex flex-col sm:flex-row items-center gap-6 md:gap-8">
+                        <div className="w-12 h-12 md:w-16 md:h-16 bg-navy-50 rounded-full flex items-center justify-center shrink-0">
+                            <Tag className="w-5 h-5 md:w-6 md:h-6 text-navy-900" />
                         </div>
-                        <div>
-                            <h4 className="text-xs font-bold text-navy-400 uppercase tracking-widest mb-2">Upcoming Alert</h4>
-                            <p className="text-xl font-light text-navy-900 leading-relaxed">
+                        <div className="text-center sm:text-left">
+                            <h4 className="text-[9px] md:text-xs font-bold text-navy-400 uppercase tracking-widest mb-1 md:mb-2">Upcoming Alert</h4>
+                            <p className="text-lg md:text-xl font-light text-navy-900 leading-relaxed">
                                 Junaid Jamshed Festive Sale starts in <span className="font-bold">4 hours</span>.
                             </p>
-                            <button className="text-navy-900 font-bold text-sm mt-4 hover:underline flex items-center gap-2">
+                            <button className="text-navy-900 font-bold text-xs md:text-sm mt-3 md:mt-4 hover:underline flex items-center gap-2 mx-auto sm:mx-0">
                                 Set Reminder <ArrowRight className="w-4 h-4" />
                             </button>
                         </div>
                     </div>
 
-                    <div className="w-full md:w-96 bg-white p-10 rounded-[2rem] border border-grey-100 flex flex-col justify-between">
-                        <div className="flex justify-between items-center mb-8">
-                            <span className="text-[10px] font-bold text-grey-400 uppercase tracking-widest">Verified Inventory</span>
-                            <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                    <div className="w-full md:w-96 bg-white p-6 md:p-10 rounded-3xl md:rounded-[2rem] border border-grey-100 flex sm:flex-row md:flex-col justify-between items-center sm:items-end md:items-start gap-4">
+                        <div className="flex justify-between items-center w-full sm:w-auto md:w-full mb-0 md:mb-8">
+                            <span className="text-[9px] md:text-[10px] font-bold text-grey-400 uppercase tracking-widest">Verified Inventory</span>
+                            <div className="w-2 h-2 rounded-full bg-green-500 hidden sm:block"></div>
                         </div>
-                        <div>
-                            <div className="text-6xl font-light text-navy-900 mb-2">1,402</div>
-                            <div className="text-[10px] font-bold text-navy-400 uppercase tracking-widest leading-none">Articles Tracked Today</div>
+                        <div className="text-right sm:text-left md:text-left">
+                            <div className="text-4xl sm:text-5xl md:text-6xl font-light text-navy-900 mb-1 md:mb-2 leading-none">1,402</div>
+                            <div className="text-[8px] md:text-[10px] font-bold text-navy-400 uppercase tracking-widest leading-none">Articles Tracked Today</div>
                         </div>
                     </div>
                 </div>

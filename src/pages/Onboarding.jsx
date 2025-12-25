@@ -61,19 +61,19 @@ const Onboarding = () => {
                     </div>
 
                     {/* Progress Indicator */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 md:gap-2">
                         {stepLabels.map((label, index) => (
                             <div key={label} className="flex items-center">
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${index + 1 < step
-                                        ? 'bg-green-500 text-white'
-                                        : index + 1 === step
-                                            ? 'bg-navy-800 text-white'
-                                            : 'bg-grey-200 text-grey-500'
+                                <div className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-[10px] md:text-xs font-bold transition-all ${index + 1 < step
+                                    ? 'bg-green-500 text-white'
+                                    : index + 1 === step
+                                        ? 'bg-navy-900 text-white'
+                                        : 'bg-grey-200 text-grey-500'
                                     }`}>
                                     {index + 1 < step ? '✓' : index + 1}
                                 </div>
                                 {index < stepLabels.length - 1 && (
-                                    <div className={`w-6 h-0.5 mx-1 transition-all ${index + 1 < step ? 'bg-green-500' : 'bg-grey-200'
+                                    <div className={`w-3 sm:w-6 h-0.5 mx-0.5 md:mx-1 transition-all ${index + 1 < step ? 'bg-green-500' : 'bg-grey-200'
                                         }`}></div>
                                 )}
                             </div>

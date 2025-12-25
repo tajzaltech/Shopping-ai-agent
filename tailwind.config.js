@@ -66,6 +66,10 @@ export default {
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
       },
+      boxShadow: {
+        'card': '0 32px 64px -16px rgba(0, 0, 0, 0.03)',
+        'card-hover': '0 48px 80px -20px rgba(0, 0, 0, 0.06)',
+      }
     },
   },
   plugins: [],

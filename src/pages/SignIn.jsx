@@ -40,20 +40,20 @@ const SignIn = () => {
         <div className="min-h-screen bg-grey-50 flex items-center justify-center p-6 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px]">
             <div className="w-full max-w-xl">
                 {/* Logo Section */}
-                <div className="flex flex-col items-center mb-10 text-center space-y-4">
-                    <Link to="/" className="flex items-center gap-3 group">
-                        <div className="w-14 h-14 bg-navy-900 rounded-[1.25rem] flex items-center justify-center shadow-2xl group-hover:scale-105 transition-transform">
-                            <ShoppingBag className="w-8 h-8 text-white" />
+                <div className="flex flex-col items-center mb-6 md:mb-10 text-center space-y-3 md:space-y-4">
+                    <Link to="/" className="flex items-center gap-2 md:gap-3 group">
+                        <div className="w-12 h-12 md:w-14 md:h-14 bg-navy-900 rounded-2xl md:rounded-[1.25rem] flex items-center justify-center shadow-2xl group-hover:scale-105 transition-transform">
+                            <ShoppingBag className="w-6 h-6 md:w-8 md:h-8 text-white" />
                         </div>
-                        <span className="text-3xl font-black text-navy-900 tracking-tighter">Stylist<span className="text-navy-600">AI</span></span>
+                        <span className="text-2xl md:text-3xl font-black text-navy-900 tracking-tighter">Stylist<span className="text-navy-600">AI</span></span>
                     </Link>
                     <div className="space-y-1">
-                        <h2 className="text-3xl font-black text-navy-900 tracking-tight leading-none">Welcome Back</h2>
-                        <p className="text-grey-500 font-medium">Continue your style journey with StylistAI</p>
+                        <h2 className="text-2xl md:text-3xl font-black text-navy-900 tracking-tight leading-none">Welcome Back</h2>
+                        <p className="text-sm md:text-base text-grey-500 font-medium">Continue your style journey with StylistAI</p>
                     </div>
                 </div>
 
-                <div className="bg-white rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border border-grey-100 p-10 md:p-12">
+                <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border border-grey-100 p-6 sm:p-10 md:p-12">
                     {/* Google Auth Button */}
                     <button
                         onClick={handleGoogleAuth}
